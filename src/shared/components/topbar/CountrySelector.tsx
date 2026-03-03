@@ -14,9 +14,11 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 import { useAppStore } from "@/stores/appStore";
 import { COUNTRIES, getCountryByCode } from "@/shared/data/countries";
 import { CountryOnboardingModal } from "./CountryOnboardingModal";
+import { useDirection } from "@/shared/hooks/useDirection";
 
 export function CountrySelector() {
   const t = useTranslations("topbar");
+  const { isRTL } = useDirection();
   const { selectedCountry, hasCompletedOnboarding, setSelectedCountry } =
     useAppStore();
 
@@ -51,7 +53,7 @@ export function CountrySelector() {
             <ChevronDown className="size-3 opacity-60" aria-hidden="true" />
           </Button>
         </DropdownMenuTrigger>
-        <DropdownMenuContent align="end" className="w-56 rounded-xl p-1">
+        <DropdownMenuContent align={isRTL ? "start" : "end"} className="w-56 rounded-xl p-1">
           <ScrollArea className="h-72">
             {COUNTRIES.map((country) => (
               <DropdownMenuItem

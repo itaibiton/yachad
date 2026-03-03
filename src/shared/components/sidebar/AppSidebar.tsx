@@ -8,6 +8,7 @@ import { Separator } from "@/components/ui/separator";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { SidebarNavItem } from "./SidebarNavItem";
 import { useAppStore } from "@/stores/appStore";
+import { useDirection } from "@/shared/hooks/useDirection";
 
 // Module navigation links in crisis priority order per CONTEXT.md
 const NAV_ITEMS = [
@@ -23,6 +24,7 @@ const NAV_ITEMS = [
 export function AppSidebar() {
   const t = useTranslations("nav");
   const { sidebarCollapsed, toggleSidebar } = useAppStore();
+  const { isRTL } = useDirection();
 
   return (
     <aside
@@ -55,7 +57,7 @@ export function AppSidebar() {
           onClick={toggleSidebar}
           aria-label="Toggle sidebar"
         >
-          <PanelLeftIcon className={cn("size-4 transition-transform", sidebarCollapsed && "rotate-180")} />
+          <PanelLeftIcon className={cn("size-4 transition-transform", isRTL && "scale-x-[-1]", sidebarCollapsed && "rotate-180")} />
         </Button>
       </div>
 

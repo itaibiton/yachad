@@ -13,10 +13,12 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { useDirection } from "@/shared/hooks/useDirection";
 
 export function ProfileMenu() {
   const t = useTranslations("topbar");
   const tAuth = useTranslations("auth");
+  const { isRTL } = useDirection();
   const { user } = useUser();
   const { signOut } = useClerk();
 
@@ -48,7 +50,7 @@ export function ProfileMenu() {
           </Avatar>
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent align="end" className="w-56 rounded-xl p-1">
+      <DropdownMenuContent align={isRTL ? "start" : "end"} className="w-56 rounded-xl p-1">
         <DropdownMenuLabel className="px-3 py-2">
           <p className="text-sm font-semibold leading-tight">{displayName}</p>
           <p className="truncate text-xs font-normal text-muted-foreground">

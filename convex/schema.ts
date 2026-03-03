@@ -146,7 +146,7 @@ export default defineSchema({
     isPinned: v.optional(v.boolean()),
     isDeleted: v.optional(v.boolean()),
   })
-    .index("by_country_time", ["country", "_creationTime"])
+    .index("by_country_time", ["country"])
     .index("by_author", ["authorId"]),
 
   // Hot/cold split for OCC avoidance — likes in separate table
@@ -189,7 +189,7 @@ export default defineSchema({
     imageStorageId: v.optional(v.id("_storage")),
     isPinned: v.optional(v.boolean()),
     isDeleted: v.optional(v.boolean()),
-  }).index("by_room_time", ["roomId", "_creationTime"]),
+  }).index("by_room_time", ["roomId"]),
 
   chatReactions: defineTable({
     messageId: v.id("chatMessages"),
@@ -272,5 +272,5 @@ export default defineSchema({
     metadata: v.optional(v.any()),
   })
     .index("by_admin", ["adminId"])
-    .index("by_action_time", ["action", "_creationTime"]),
+    .index("by_action_time", ["action"]),
 });

@@ -10,6 +10,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Badge } from "@/components/ui/badge";
+import { useDirection } from "@/shared/hooks/useDirection";
 
 interface NotificationBellProps {
   count?: number;
@@ -17,6 +18,7 @@ interface NotificationBellProps {
 
 export function NotificationBell({ count = 0 }: NotificationBellProps) {
   const t = useTranslations("topbar");
+  const { isRTL } = useDirection();
 
   return (
     <DropdownMenu>
@@ -38,7 +40,7 @@ export function NotificationBell({ count = 0 }: NotificationBellProps) {
           )}
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent align="end" className="w-72 rounded-xl p-2">
+      <DropdownMenuContent align={isRTL ? "start" : "end"} className="w-72 rounded-xl p-2">
         <DropdownMenuLabel className="text-sm font-semibold">
           {t("notifications")}
         </DropdownMenuLabel>

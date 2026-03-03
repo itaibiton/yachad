@@ -14,6 +14,7 @@ import {
 import { useAppStore } from "@/stores/appStore";
 import { getCountryByCode } from "@/shared/data/countries";
 import { cn } from "@/lib/utils";
+import { useDirection } from "@/shared/hooks/useDirection";
 
 interface EmergencyButtonProps {
   /** When true, renders as a floating action button for mobile */
@@ -22,6 +23,7 @@ interface EmergencyButtonProps {
 
 export function EmergencyButton({ isFAB = false }: EmergencyButtonProps) {
   const t = useTranslations("emergency");
+  const { isRTL } = useDirection();
   const { selectedCountry } = useAppStore();
   const country = selectedCountry ? getCountryByCode(selectedCountry) : null;
 
@@ -73,7 +75,7 @@ export function EmergencyButton({ isFAB = false }: EmergencyButtonProps) {
     <DropdownMenu>
       <DropdownMenuTrigger asChild>{trigger}</DropdownMenuTrigger>
       <DropdownMenuContent
-        align="end"
+        align={isRTL ? "start" : "end"}
         className="w-56 rounded-xl p-1"
         sideOffset={8}
       >

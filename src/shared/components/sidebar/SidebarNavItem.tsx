@@ -4,13 +4,13 @@ import { type LucideIcon } from "lucide-react";
 import { usePathname } from "next/navigation";
 import { Link } from "@/i18n/routing";
 import { cn } from "@/lib/utils";
-import { Button } from "@/components/ui/button";
 import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
+import { useDirection } from "@/shared/hooks/useDirection";
 
 interface SidebarNavItemProps {
   href: string;
@@ -26,43 +26,39 @@ export function SidebarNavItem({
   collapsed = false,
 }: SidebarNavItemProps) {
   const pathname = usePathname();
-  // Check if current pathname includes the href segment (excluding home)
+  const { isRTL } = useDirection();
+
   const isActive =
     href === "/"
       ? pathname.endsWith("/") || /^\/[a-z]{2}\/?$/.test(pathname)
       : pathname.includes(href.replace(/^\//, ""));
 
-  const button = (
-    <Button
-      variant="ghost"
-      asChild
+  const link = (
+    <Link
+      href={href}
       className={cn(
-        "w-full justify-start gap-3 rounded-lg font-sans transition-colors",
-        collapsed ? "size-10 justify-center p-0" : "ps-3 pe-4",
+        "flex items-center gap-3 rounded-lg font-sans text-sm font-medium transition-colors",
+        collapsed ? "size-10 justify-center p-0" : "w-full px-3 py-2",
         isActive
           ? "bg-brand/10 text-brand hover:bg-brand/15 hover:text-brand"
           : "hover:bg-accent hover:text-accent-foreground"
       )}
       aria-current={isActive ? "page" : undefined}
     >
-      <Link href={href}>
-        <Icon
-          className={cn("size-5 shrink-0", isActive ? "text-brand" : "")}
-          aria-hidden="true"
-        />
-        {!collapsed && (
-          <span className="truncate text-sm font-medium">{label}</span>
-        )}
-      </Link>
-    </Button>
+      <Icon
+        className={cn("size-5 shrink-0", isActive ? "text-brand" : "")}
+        aria-hidden="true"
+      />
+      {!collapsed && <span className="truncate">{label}</span>}
+    </Link>
   );
 
   if (collapsed) {
     return (
       <TooltipProvider>
         <Tooltip>
-          <TooltipTrigger asChild>{button}</TooltipTrigger>
-          <TooltipContent side="right">
+          <TooltipTrigger asChild>{link}</TooltipTrigger>
+          <TooltipContent side={isRTL ? "left" : "right"}>
             <p>{label}</p>
           </TooltipContent>
         </Tooltip>
@@ -70,5 +66,5 @@ export function SidebarNavItem({
     );
   }
 
-  return button;
+  return link;
 }
