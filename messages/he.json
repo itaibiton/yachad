@@ -1,0 +1,85 @@
+{
+  "app": {
+    "name": "יחד",
+    "tagline": "יחד ננצח",
+    "description": "מחברים ישראלים תקועים עם טיסות חילוץ, שירותים מקומיים וקהילה בזמן אמת"
+  },
+  "nav": {
+    "home": "ראשי",
+    "flights": "טיסות חילוץ",
+    "news": "חדשות",
+    "map": "מפת שירותים",
+    "feed": "קהילה",
+    "chat": "צ'אט",
+    "reservations": "מלונות",
+    "agent": "פורטל סוכנים",
+    "admin": "ניהול"
+  },
+  "topbar": {
+    "search": "חיפוש...",
+    "country": "מיקום נוכחי",
+    "emergency": "חירום",
+    "language": "שפה",
+    "notifications": "התראות",
+    "profile": "פרופיל",
+    "darkMode": "מצב כהה",
+    "lightMode": "מצב בהיר",
+    "systemMode": "לפי המערכת"
+  },
+  "emergency": {
+    "title": "חירום",
+    "callEmbassy": "התקשר לשגרירות",
+    "shareLocation": "שתף מיקום",
+    "emergencyChat": "צ'אט חירום",
+    "reportDanger": "דווח על סכנה"
+  },
+  "auth": {
+    "signIn": "כניסה",
+    "signUp": "הרשמה",
+    "signOut": "יציאה",
+    "welcomeBack": "ברוך הבא!",
+    "createAccount": "יצירת חשבון"
+  },
+  "dashboard": {
+    "title": "סקירה כללית",
+    "latestFlights": "טיסות אחרונות",
+    "urgentAlerts": "התראות דחופות",
+    "recentPosts": "פוסטים אחרונים",
+    "nearbyServices": "שירותים בסביבה",
+    "noFlights": "אין טיסות זמינות",
+    "noAlerts": "אין התראות דחופות",
+    "noPosts": "אין פוסטים חדשים",
+    "noServices": "אין שירותים בסביבה"
+  },
+  "country": {
+    "selectTitle": "היכן אתה עכשיו?",
+    "selectDescription": "בחר את המדינה בה אתה נמצא כרגע",
+    "autoDetect": "זיהוי אוטומטי",
+    "changeAnytime": "ניתן לשנות בכל עת"
+  },
+  "common": {
+    "loading": "טוען...",
+    "error": "שגיאה",
+    "retry": "נסה שוב",
+    "cancel": "ביטול",
+    "save": "שמור",
+    "delete": "מחק",
+    "edit": "ערוך",
+    "close": "סגור",
+    "back": "חזור",
+    "next": "הבא",
+    "submit": "שלח",
+    "search": "חיפוש",
+    "filter": "סינון",
+    "sort": "מיון",
+    "noResults": "לא נמצאו תוצאות",
+    "seeAll": "ראה הכל"
+  },
+  "errors": {
+    "generic": "משהו השתבש. נסה שוב.",
+    "notFound": "הדף לא נמצא",
+    "unauthorized": "אין לך הרשאה לצפות בדף זה",
+    "networkError": "בעיית חיבור. בדוק את האינטרנט.",
+    "rateLimited": "יותר מדי בקשות. נסה שוב בעוד כמה דקות."
+  }
+}

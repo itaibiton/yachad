@@ -1,0 +1,85 @@
+{
+  "app": {
+    "name": "Yachad",
+    "tagline": "Together we overcome",
+    "description": "Connecting stranded Israelis with extraction flights, local services, and community in real time"
+  },
+  "nav": {
+    "home": "Home",
+    "flights": "Extraction Flights",
+    "news": "News",
+    "map": "Services Map",
+    "feed": "Community",
+    "chat": "Chat",
+    "reservations": "Hotels",
+    "agent": "Agent Portal",
+    "admin": "Admin"
+  },
+  "topbar": {
+    "search": "Search...",
+    "country": "Current Location",
+    "emergency": "Emergency",
+    "language": "Language",
+    "notifications": "Notifications",
+    "profile": "Profile",
+    "darkMode": "Dark Mode",
+    "lightMode": "Light Mode",
+    "systemMode": "System"
+  },
+  "emergency": {
+    "title": "Emergency",
+    "callEmbassy": "Call Embassy",
+    "shareLocation": "Share Location",
+    "emergencyChat": "Emergency Chat",
+    "reportDanger": "Report Danger"
+  },
+  "auth": {
+    "signIn": "Sign In",
+    "signUp": "Sign Up",
+    "signOut": "Sign Out",
+    "welcomeBack": "Welcome Back!",
+    "createAccount": "Create Account"
+  },
+  "dashboard": {
+    "title": "Overview",
+    "latestFlights": "Latest Flights",
+    "urgentAlerts": "Urgent Alerts",
+    "recentPosts": "Recent Posts",
+    "nearbyServices": "Nearby Services",
+    "noFlights": "No flights available",
+    "noAlerts": "No urgent alerts",
+    "noPosts": "No new posts",
+    "noServices": "No nearby services"
+  },
+  "country": {
+    "selectTitle": "Where are you now?",
+    "selectDescription": "Select the country you are currently in",
+    "autoDetect": "Auto-detect",
+    "changeAnytime": "You can change anytime"
+  },
+  "common": {
+    "loading": "Loading...",
+    "error": "Error",
+    "retry": "Try Again",
+    "cancel": "Cancel",
+    "save": "Save",
+    "delete": "Delete",
+    "edit": "Edit",
+    "close": "Close",
+    "back": "Back",
+    "next": "Next",
+    "submit": "Submit",
+    "search": "Search",
+    "filter": "Filter",
+    "sort": "Sort",
+    "noResults": "No results found",
+    "seeAll": "See All"
+  },
+  "errors": {
+    "generic": "Something went wrong. Please try again.",
+    "notFound": "Page not found",
+    "unauthorized": "You are not authorized to view this page",
+    "networkError": "Connection issue. Check your internet.",
+    "rateLimited": "Too many requests. Please try again in a few minutes."
+  }
+}
