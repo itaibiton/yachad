@@ -3,12 +3,12 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: unknown
-last_updated: "2026-03-03T21:42:16.374Z"
+last_updated: "2026-03-03T21:48:19.047Z"
 progress:
   total_phases: 2
   completed_phases: 1
   total_plans: 9
-  completed_plans: 7
+  completed_plans: 8
 ---
 
 # Project State
@@ -51,6 +51,7 @@ Progress: [██████████] 100%
 | Phase 01-foundation P05a | 8 | 3 tasks | 20 files |
 | Phase 01-foundation P05b | 7 | 2 tasks | 26 files |
 | Phase 02-extraction-flights-marketplace P01 | 2 | 2 tasks | 4 files |
+| Phase 02 P02 | 3 | 2 tasks | 3 files |
 
 ## Accumulated Context
 
@@ -93,6 +94,10 @@ Plan 01-04 decisions:
 - [Phase 02-01]: convex-helpers filter() used for listFlights to avoid undersized pagination pages when used before .paginate()
 - [Phase 02-01]: by_country_departure index does not constrain status — status===available additionally filtered in TS when departureCountry provided
 - [Phase 02-01]: getFlightWithAgent includes agentEmail for detail panel; list queries omit it to keep card payload minimal
+- [Phase 02-02]: Relative convex import path used in src/ files (../../../../convex/_generated/) — no tsconfig alias exists for convex/ root directory
+- [Phase 02-02]: Sheet side='right' kept static — SheetContent uses logical end-0/start-0 per research finding; no dynamic RTL switching needed
+- [Phase 02-02]: WhatsApp message always in Hebrew — both users and agents are Israeli per CONTEXT.md
+- [Phase 02-02]: Phone reveal calls incrementContactCount best-effort — still shows phone even if mutation throws
 
 ### Roadmap Evolution
 

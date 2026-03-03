@@ -187,7 +187,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6 → 7 → 8 →
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
 | 1. Foundation | 6/6 | Complete   | 2026-03-03 |
-| 2. Extraction Flights Marketplace | 0/3 | Planned | - |
+| 2. Extraction Flights Marketplace | 2/3 | In Progress|  |
 | 3. Flight Agent Portal | 0/3 | Not started | - |
 | 4. News Aggregator | 0/3 | Not started | - |
 | 5. Jewish Services Map | 0/3 | Not started | - |
