@@ -22,9 +22,11 @@
     "language": "Language",
     "notifications": "Notifications",
     "profile": "Profile",
+    "menu": "Menu",
     "darkMode": "Dark Mode",
     "lightMode": "Light Mode",
-    "systemMode": "System"
+    "systemMode": "System",
+    "switchLanguage": "עברית"
   },
   "emergency": {
     "title": "Emergency",

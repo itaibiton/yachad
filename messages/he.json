@@ -22,9 +22,11 @@
     "language": "שפה",
     "notifications": "התראות",
     "profile": "פרופיל",
+    "menu": "תפריט",
     "darkMode": "מצב כהה",
     "lightMode": "מצב בהיר",
-    "systemMode": "לפי המערכת"
+    "systemMode": "לפי המערכת",
+    "switchLanguage": "English"
   },
   "emergency": {
     "title": "חירום",
