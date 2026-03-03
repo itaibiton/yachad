@@ -37,7 +37,7 @@ export function SidebarNavItem({
     <Link
       href={href}
       className={cn(
-        "flex items-center gap-3 rounded-lg font-sans text-sm font-medium transition-colors",
+        "flex rtl:flex-row-reverse items-center gap-3 rounded-lg font-sans text-sm font-medium transition-colors",
         collapsed ? "size-10 justify-center p-0" : "w-full px-3 py-2",
         isActive
           ? "bg-brand/10 text-brand hover:bg-brand/15 hover:text-brand"
