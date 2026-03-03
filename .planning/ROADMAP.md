@@ -53,12 +53,12 @@ Plans:
   3. A user can tap the WhatsApp contact button or reveal a phone number to contact an agent directly from a listing
   4. Verified agents display a "verified" badge; listings are sorted by soonest departure by default
   5. Package listings (flight + hotel + transfer + insurance) display all components as a single bundled listing
-**Plans**: TBD
+**Plans**: 3 plans
 
 Plans:
-- [ ] 02-01: Convex queries for flights — paginated listing browse with search and filter (usePaginatedQuery, all indexes leveraged)
-- [ ] 02-02: Flight card component — all display fields, status badge, urgency badge, seat counter, verified badge, RTL layout, mobile-first
-- [ ] 02-03: Flights page — filter UI, sort control, infinite scroll via react-intersection-observer, preloadQuery + usePreloadedQuery for real-time status
+- [ ] 02-01-PLAN.md — Convex flight queries (listFlights, listUrgentFlights, getFlightWithAgent), incrementContactCount mutation, flights i18n messages [Wave 1]
+- [ ] 02-02-PLAN.md — FlightCard component, FlightDetailSheet panel, flight-utils (WhatsApp URL, urgency, pricing) [Wave 1]
+- [ ] 02-03-PLAN.md — FlightsPage server component, FlightsClientPage, FlightFilterBar, FlightsGrid with infinite scroll, UrgentFlightsSection [Wave 2]
 
 ### Phase 3: Flight Agent Portal
 **Goal**: Flight agents can create, manage, and track their extraction flight listings through a private dashboard, and their listings remain invisible to users until admin approval
@@ -187,7 +187,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6 → 7 → 8 →
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
 | 1. Foundation | 6/6 | Complete   | 2026-03-03 |
-| 2. Extraction Flights Marketplace | 0/3 | Not started | - |
+| 2. Extraction Flights Marketplace | 0/3 | Planned | - |
 | 3. Flight Agent Portal | 0/3 | Not started | - |
 | 4. News Aggregator | 0/3 | Not started | - |
 | 5. Jewish Services Map | 0/3 | Not started | - |
