@@ -1,3 +1,16 @@
+---
+gsd_state_version: 1.0
+milestone: v1.0
+milestone_name: milestone
+status: unknown
+last_updated: "2026-03-03T15:40:20.718Z"
+progress:
+  total_phases: 1
+  completed_phases: 0
+  total_plans: 6
+  completed_plans: 4
+---
+
 # Project State
 
 ## Project Reference
@@ -34,6 +47,7 @@ Progress: [███░░░░░░░] 8%
 - Trend: Stable
 
 *Updated after each plan completion*
+| Phase 01-foundation P03 | 3 | 2 tasks | 10 files |
 
 ## Accumulated Context
 
@@ -65,6 +79,9 @@ Plan 01-04 decisions:
 - [01-04]: Toaster position adapts to locale direction: top-left for RTL (Hebrew), top-right for LTR (English)
 - [01-04]: localePrefix: "always" ensures canonical /he/ and /en/ URL prefixes — no ambiguous root URLs
 - [01-04]: Inter font variable moved to locale layout to stay scoped to the locale html element
+- [Phase 01-03]: proxy.ts imports @/i18n/routing via src/i18n/routing.ts re-export — root i18n/routing.ts stays canonical for next.config.ts while src/ files use @/ alias
+- [Phase 01-03]: intlMiddleware called before auth.protect() — ensures locale detection fires on every request including the sign-in redirect itself
+- [Phase 01-03]: Clerk redirect URLs set without locale prefix — proxy.ts locale redirect prepends /{locale} so users land on /{locale}/sign-in without hardcoding locale in Clerk dashboard
 
 ### Pending Todos
 
@@ -78,5 +95,5 @@ None yet.
 ## Session Continuity
 
 Last session: 2026-03-03
-Stopped at: Completed 01-04-PLAN.md (i18n Locale Routing and Bilingual Messages)
+Stopped at: Completed 01-03-PLAN.md (Clerk three-layer auth: proxy.ts, page guards, sign-in/sign-up pages)
 Resume file: None
