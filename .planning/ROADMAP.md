@@ -13,7 +13,7 @@ Yachad is built in nine phases, ordered by dependency. Phase 1 establishes the n
 Decimal phases appear between their surrounding integers in numeric order.
 
 - [x] **Phase 1: Foundation** - Security, schema, auth, RTL design system, and i18n infrastructure (completed 2026-03-03)
-- [ ] **Phase 2: Extraction Flights Marketplace** - Users can discover and contact agents for extraction flights
+- [x] **Phase 2: Extraction Flights Marketplace** - Users can discover and contact agents for extraction flights (completed 2026-03-03)
 - [ ] **Phase 3: Flight Agent Portal** - Agents can manage their listings through a dedicated dashboard
 - [ ] **Phase 4: News Aggregator** - Users can monitor live news and urgent crisis alerts
 - [ ] **Phase 5: Jewish Services Map** - Users can locate Jewish services and embassies near their position
@@ -187,7 +187,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6 → 7 → 8 →
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
 | 1. Foundation | 6/6 | Complete   | 2026-03-03 |
-| 2. Extraction Flights Marketplace | 2/3 | In Progress|  |
+| 2. Extraction Flights Marketplace | 3/3 | Complete   | 2026-03-03 |
 | 3. Flight Agent Portal | 0/3 | Not started | - |
 | 4. News Aggregator | 0/3 | Not started | - |
 | 5. Jewish Services Map | 0/3 | Not started | - |
