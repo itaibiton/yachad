@@ -192,110 +192,110 @@ Which phases cover which requirements. Updated during roadmap creation.
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| FOUN-01 | — | Pending |
-| FOUN-02 | — | Pending |
-| FOUN-03 | — | Pending |
-| FOUN-04 | — | Pending |
-| FOUN-05 | — | Pending |
-| FOUN-06 | — | Pending |
-| FOUN-07 | — | Pending |
-| FOUN-08 | — | Pending |
-| FOUN-09 | — | Pending |
-| FOUN-10 | — | Pending |
-| FOUN-11 | — | Pending |
-| FOUN-12 | — | Pending |
-| FOUN-13 | — | Pending |
-| FLIT-01 | — | Pending |
-| FLIT-02 | — | Pending |
-| FLIT-03 | — | Pending |
-| FLIT-04 | — | Pending |
-| FLIT-05 | — | Pending |
-| FLIT-06 | — | Pending |
-| FLIT-07 | — | Pending |
-| FLIT-08 | — | Pending |
-| FLIT-09 | — | Pending |
-| FLIT-10 | — | Pending |
-| FLIT-11 | — | Pending |
-| FLIT-12 | — | Pending |
-| AGNT-01 | — | Pending |
-| AGNT-02 | — | Pending |
-| AGNT-03 | — | Pending |
-| AGNT-04 | — | Pending |
-| AGNT-05 | — | Pending |
-| AGNT-06 | — | Pending |
-| AGNT-07 | — | Pending |
-| MAPS-01 | — | Pending |
-| MAPS-02 | — | Pending |
-| MAPS-03 | — | Pending |
-| MAPS-04 | — | Pending |
-| MAPS-05 | — | Pending |
-| MAPS-06 | — | Pending |
-| MAPS-07 | — | Pending |
-| MAPS-08 | — | Pending |
-| MAPS-09 | — | Pending |
-| MAPS-10 | — | Pending |
-| MAPS-11 | — | Pending |
-| MAPS-12 | — | Pending |
-| NEWS-01 | — | Pending |
-| NEWS-02 | — | Pending |
-| NEWS-03 | — | Pending |
-| NEWS-04 | — | Pending |
-| NEWS-05 | — | Pending |
-| NEWS-06 | — | Pending |
-| NEWS-07 | — | Pending |
-| NEWS-08 | — | Pending |
-| NEWS-09 | — | Pending |
-| NEWS-10 | — | Pending |
-| FEED-01 | — | Pending |
-| FEED-02 | — | Pending |
-| FEED-03 | — | Pending |
-| FEED-04 | — | Pending |
-| FEED-05 | — | Pending |
-| FEED-06 | — | Pending |
-| FEED-07 | — | Pending |
-| FEED-08 | — | Pending |
-| FEED-09 | — | Pending |
-| FEED-10 | — | Pending |
-| FEED-11 | — | Pending |
-| FEED-12 | — | Pending |
-| FEED-13 | — | Pending |
-| CHAT-01 | — | Pending |
-| CHAT-02 | — | Pending |
-| CHAT-03 | — | Pending |
-| CHAT-04 | — | Pending |
-| CHAT-05 | — | Pending |
-| CHAT-06 | — | Pending |
-| CHAT-07 | — | Pending |
-| CHAT-08 | — | Pending |
-| CHAT-09 | — | Pending |
-| CHAT-10 | — | Pending |
-| CHAT-11 | — | Pending |
-| CHAT-12 | — | Pending |
-| RESV-01 | — | Pending |
-| RESV-02 | — | Pending |
-| RESV-03 | — | Pending |
-| RESV-04 | — | Pending |
-| RESV-05 | — | Pending |
-| RESV-06 | — | Pending |
-| RESV-07 | — | Pending |
-| RESV-08 | — | Pending |
-| RESV-09 | — | Pending |
-| RESV-10 | — | Pending |
-| ADMN-01 | — | Pending |
-| ADMN-02 | — | Pending |
-| ADMN-03 | — | Pending |
-| ADMN-04 | — | Pending |
-| ADMN-05 | — | Pending |
-| ADMN-06 | — | Pending |
-| ADMN-07 | — | Pending |
-| ADMN-08 | — | Pending |
-| ADMN-09 | — | Pending |
+| FOUN-01 | Phase 1 | Pending |
+| FOUN-02 | Phase 1 | Pending |
+| FOUN-03 | Phase 1 | Pending |
+| FOUN-04 | Phase 1 | Pending |
+| FOUN-05 | Phase 1 | Pending |
+| FOUN-06 | Phase 1 | Pending |
+| FOUN-07 | Phase 1 | Pending |
+| FOUN-08 | Phase 1 | Pending |
+| FOUN-09 | Phase 1 | Pending |
+| FOUN-10 | Phase 1 | Pending |
+| FOUN-11 | Phase 1 | Pending |
+| FOUN-12 | Phase 1 | Pending |
+| FOUN-13 | Phase 1 | Pending |
+| FLIT-01 | Phase 2 | Pending |
+| FLIT-02 | Phase 2 | Pending |
+| FLIT-03 | Phase 2 | Pending |
+| FLIT-04 | Phase 2 | Pending |
+| FLIT-05 | Phase 2 | Pending |
+| FLIT-06 | Phase 2 | Pending |
+| FLIT-07 | Phase 2 | Pending |
+| FLIT-08 | Phase 2 | Pending |
+| FLIT-09 | Phase 2 | Pending |
+| FLIT-10 | Phase 2 | Pending |
+| FLIT-11 | Phase 2 | Pending |
+| FLIT-12 | Phase 2 | Pending |
+| AGNT-01 | Phase 3 | Pending |
+| AGNT-02 | Phase 3 | Pending |
+| AGNT-03 | Phase 3 | Pending |
+| AGNT-04 | Phase 3 | Pending |
+| AGNT-05 | Phase 3 | Pending |
+| AGNT-06 | Phase 3 | Pending |
+| AGNT-07 | Phase 3 | Pending |
+| MAPS-01 | Phase 5 | Pending |
+| MAPS-02 | Phase 5 | Pending |
+| MAPS-03 | Phase 5 | Pending |
+| MAPS-04 | Phase 5 | Pending |
+| MAPS-05 | Phase 5 | Pending |
+| MAPS-06 | Phase 5 | Pending |
+| MAPS-07 | Phase 5 | Pending |
+| MAPS-08 | Phase 5 | Pending |
+| MAPS-09 | Phase 5 | Pending |
+| MAPS-10 | Phase 5 | Pending |
+| MAPS-11 | Phase 5 | Pending |
+| MAPS-12 | Phase 5 | Pending |
+| NEWS-01 | Phase 4 | Pending |
+| NEWS-02 | Phase 4 | Pending |
+| NEWS-03 | Phase 4 | Pending |
+| NEWS-04 | Phase 4 | Pending |
+| NEWS-05 | Phase 4 | Pending |
+| NEWS-06 | Phase 4 | Pending |
+| NEWS-07 | Phase 4 | Pending |
+| NEWS-08 | Phase 4 | Pending |
+| NEWS-09 | Phase 4 | Pending |
+| NEWS-10 | Phase 4 | Pending |
+| FEED-01 | Phase 6 | Pending |
+| FEED-02 | Phase 6 | Pending |
+| FEED-03 | Phase 6 | Pending |
+| FEED-04 | Phase 6 | Pending |
+| FEED-05 | Phase 6 | Pending |
+| FEED-06 | Phase 6 | Pending |
+| FEED-07 | Phase 6 | Pending |
+| FEED-08 | Phase 6 | Pending |
+| FEED-09 | Phase 6 | Pending |
+| FEED-10 | Phase 6 | Pending |
+| FEED-11 | Phase 6 | Pending |
+| FEED-12 | Phase 6 | Pending |
+| FEED-13 | Phase 6 | Pending |
+| CHAT-01 | Phase 7 | Pending |
+| CHAT-02 | Phase 7 | Pending |
+| CHAT-03 | Phase 7 | Pending |
+| CHAT-04 | Phase 7 | Pending |
+| CHAT-05 | Phase 7 | Pending |
+| CHAT-06 | Phase 7 | Pending |
+| CHAT-07 | Phase 7 | Pending |
+| CHAT-08 | Phase 7 | Pending |
+| CHAT-09 | Phase 7 | Pending |
+| CHAT-10 | Phase 7 | Pending |
+| CHAT-11 | Phase 7 | Pending |
+| CHAT-12 | Phase 7 | Pending |
+| RESV-01 | Phase 8 | Pending |
+| RESV-02 | Phase 8 | Pending |
+| RESV-03 | Phase 8 | Pending |
+| RESV-04 | Phase 8 | Pending |
+| RESV-05 | Phase 8 | Pending |
+| RESV-06 | Phase 8 | Pending |
+| RESV-07 | Phase 8 | Pending |
+| RESV-08 | Phase 8 | Pending |
+| RESV-09 | Phase 8 | Pending |
+| RESV-10 | Phase 8 | Pending |
+| ADMN-01 | Phase 9 | Pending |
+| ADMN-02 | Phase 9 | Pending |
+| ADMN-03 | Phase 9 | Pending |
+| ADMN-04 | Phase 9 | Pending |
+| ADMN-05 | Phase 9 | Pending |
+| ADMN-06 | Phase 9 | Pending |
+| ADMN-07 | Phase 9 | Pending |
+| ADMN-08 | Phase 9 | Pending |
+| ADMN-09 | Phase 9 | Pending |
 
 **Coverage:**
 - v1 requirements: 87 total
-- Mapped to phases: 0
-- Unmapped: 87 ⚠️
+- Mapped to phases: 87
+- Unmapped: 0
 
 ---
 *Requirements defined: 2026-03-03*
-*Last updated: 2026-03-03 after initial definition*
+*Last updated: 2026-03-03 — Traceability completed after roadmap creation*
