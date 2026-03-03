@@ -17,8 +17,8 @@ Requirements for initial release. Each maps to roadmap phases.
 - [x] **FOUN-06**: Hebrew-first RTL layout with `dir="rtl"` and logical CSS properties throughout
 - [x] **FOUN-07**: English + Hebrew i18n via next-intl v4 with locale-based routing
 - [x] **FOUN-08**: Dark mode with system preference detection and manual toggle
-- [ ] **FOUN-09**: Fully responsive mobile-first design across all modules
-- [ ] **FOUN-10**: Dashboard layout with sidebar navigation (all 7 modules), top bar (country selector, emergency button, language toggle, notifications, profile)
+- [x] **FOUN-09**: Fully responsive mobile-first design across all modules
+- [x] **FOUN-10**: Dashboard layout with sidebar navigation (all 7 modules), top bar (country selector, emergency button, language toggle, notifications, profile)
 - [x] **FOUN-11**: Rate limiting on all write operations via @convex-dev/rate-limiter
 - [ ] **FOUN-12**: Error boundaries with user-friendly Hebrew/English error messages
 - [ ] **FOUN-13**: Loading states with skeleton screens on all data-fetching components
@@ -200,8 +200,8 @@ Which phases cover which requirements. Updated during roadmap creation.
 | FOUN-06 | Phase 1 | Complete |
 | FOUN-07 | Phase 1 | Complete |
 | FOUN-08 | Phase 1 | Complete |
-| FOUN-09 | Phase 1 | Pending |
-| FOUN-10 | Phase 1 | Pending |
+| FOUN-09 | Phase 1 | Complete |
+| FOUN-10 | Phase 1 | Complete |
 | FOUN-11 | Phase 1 | Complete |
 | FOUN-12 | Phase 1 | Pending |
 | FOUN-13 | Phase 1 | Pending |

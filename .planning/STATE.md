@@ -3,12 +3,12 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: unknown
-last_updated: "2026-03-03T15:40:20.718Z"
+last_updated: "2026-03-03T15:53:08.787Z"
 progress:
   total_phases: 1
   completed_phases: 0
   total_plans: 6
-  completed_plans: 4
+  completed_plans: 5
 ---
 
 # Project State
@@ -23,31 +23,32 @@ See: .planning/PROJECT.md (updated 2026-03-03)
 ## Current Position
 
 Phase: 1 of 9 (Foundation)
-Plan: 4 of 5 in current phase
-Status: Executing — Plan 01-04 complete
-Last activity: 2026-03-03 — Plan 01-04 (i18n Locale Routing) complete. next-intl v4 locale routing, bilingual Hebrew/English messages, locale layout with dynamic RTL/LTR dir attribute.
+Plan: 5a of 6 in current phase (5 complete, 1 remaining: 01-05b)
+Status: Executing — Plan 01-05a complete
+Last activity: 2026-03-03 — Plan 01-05a (Shared Dashboard Components) complete. Zustand store, sidebar + mobile bottom nav, full top bar with IP geolocation country onboarding, emergency button with FAB, error boundary, 6 skeleton variants.
 
-Progress: [███░░░░░░░] 8%
+Progress: [████░░░░░░] 10%
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 4
+- Total plans completed: 5
 - Average duration: 5 min
-- Total execution time: 0.3 hours
+- Total execution time: 0.5 hours
 
 **By Phase:**
 
 | Phase | Plans | Total | Avg/Plan |
 |-------|-------|-------|----------|
-| 01-foundation | 4 | 21 min | 5 min |
+| 01-foundation | 5 | 29 min | 6 min |
 
 **Recent Trend:**
-- Last 5 plans: 01-01 (5 min), 01-02 (6 min), 01-03 (6 min), 01-04 (2 min)
+- Last 5 plans: 01-01 (5 min), 01-02 (6 min), 01-03 (6 min), 01-04 (2 min), 01-05a (8 min)
 - Trend: Stable
 
 *Updated after each plan completion*
 | Phase 01-foundation P03 | 3 | 2 tasks | 10 files |
+| Phase 01-foundation P05a | 8 | 3 tasks | 20 files |
 
 ## Accumulated Context
 
@@ -82,6 +83,9 @@ Plan 01-04 decisions:
 - [Phase 01-03]: proxy.ts imports @/i18n/routing via src/i18n/routing.ts re-export — root i18n/routing.ts stays canonical for next.config.ts while src/ files use @/ alias
 - [Phase 01-03]: intlMiddleware called before auth.protect() — ensures locale detection fires on every request including the sign-in redirect itself
 - [Phase 01-03]: Clerk redirect URLs set without locale prefix — proxy.ts locale redirect prepends /{locale} so users land on /{locale}/sign-in without hardcoding locale in Clerk dashboard
+- [Phase 01-05a]: createNavigation added to i18n/routing.ts so @/i18n/routing exports locale-aware Link and useRouter — plan referenced these exports but they were missing from the file
+- [Phase 01-05a]: EmergencyButton uses isFAB prop to render as mobile FAB (fixed bottom-20 end-4) or top-bar icon — single component for both contexts
+- [Phase 01-05a]: countries.ts shared data file in /src/shared/data/ created for CountrySelector and CountryOnboardingModal to share 30-country list
 
 ### Pending Todos
 
@@ -95,5 +99,5 @@ None yet.
 ## Session Continuity
 
 Last session: 2026-03-03
-Stopped at: Completed 01-03-PLAN.md (Clerk three-layer auth: proxy.ts, page guards, sign-in/sign-up pages)
+Stopped at: Completed 01-05a-PLAN.md (shared dashboard components: Zustand store, sidebar, topbar, emergency button, country onboarding modal, error boundary, skeleton loading)
 Resume file: None
