@@ -4,7 +4,6 @@ import { Home, Plane, Newspaper, MapPin, Users, MessageSquare, Hotel, PanelLeftI
 import { useTranslations } from "next-intl";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
-import { Separator } from "@/components/ui/separator";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { SidebarNavItem } from "./SidebarNavItem";
 import { useAppStore } from "@/stores/appStore";
@@ -29,31 +28,22 @@ export function AppSidebar() {
   return (
     <aside
       className={cn(
-        // Hidden on mobile — mobile uses MobileBottomNav instead
-        "hidden md:flex flex-col border-e bg-sidebar text-sidebar-foreground transition-all duration-300",
+        "hidden md:flex flex-col bg-sidebar text-sidebar-foreground transition-all duration-300",
         sidebarCollapsed ? "w-14" : "w-56"
       )}
       aria-label="Main navigation"
     >
-      {/* Logo area */}
+      {/* Collapse toggle */}
       <div
         className={cn(
-          "flex items-center border-b py-4",
-          sidebarCollapsed ? "justify-center px-2" : "gap-2 ps-4 pe-3"
+          "flex items-center py-4",
+          sidebarCollapsed ? "justify-center px-2" : "px-3"
         )}
       >
-        {!sidebarCollapsed && (
-          <span className="text-xl font-bold tracking-tight text-brand">
-            יחד
-          </span>
-        )}
-        {sidebarCollapsed && (
-          <span className="text-xl font-bold text-brand">י</span>
-        )}
         <Button
           variant="ghost"
           size="icon"
-          className={cn("ms-auto size-8", sidebarCollapsed && "ms-0")}
+          className="size-8"
           onClick={toggleSidebar}
           aria-label="Toggle sidebar"
         >
@@ -75,11 +65,6 @@ export function AppSidebar() {
           ))}
         </nav>
       </ScrollArea>
-
-      <Separator />
-
-      {/* Footer area — can show user info later */}
-      <div className={cn("py-3", sidebarCollapsed ? "px-1" : "px-2")} />
     </aside>
   );
 }
