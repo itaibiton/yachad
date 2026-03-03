@@ -1,5 +1,6 @@
 import { auth } from "@clerk/nextjs/server";
 import { redirect } from "next/navigation";
+import { DashboardShell } from "@/shared/components/DashboardShell";
 
 export default async function DashboardLayout({
   children,
@@ -8,12 +9,12 @@ export default async function DashboardLayout({
   children: React.ReactNode;
   params: Promise<{ locale: string }>;
 }) {
-  const { locale } = await params;
   const { userId } = await auth();
+  const { locale } = await params;
 
   if (!userId) {
     redirect(`/${locale}/sign-in`);
   }
 
-  return <>{children}</>;
+  return <DashboardShell>{children}</DashboardShell>;
 }
