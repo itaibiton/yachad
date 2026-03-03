@@ -6,7 +6,7 @@
 <domain>
 ## Phase Boundary
 
-The entire platform infrastructure: Next.js 15 project scaffold, Convex schema for all 7 modules with production indexes, three-layer Clerk auth (middleware + page + Convex function), next-intl v4 Hebrew/English with RTL, dark mode, responsive dashboard shell with sidebar + top bar, rate limiting, error boundaries, and skeleton loading states.
+The entire platform infrastructure: Next.js 16 project scaffold (Turbopack default), Convex schema for all 7 modules with production indexes, three-layer Clerk auth (proxy.ts + page + Convex function), next-intl v4 Hebrew/English with RTL, dark mode, responsive dashboard shell with sidebar + top bar, rate limiting, error boundaries, and skeleton loading states.
 
 </domain>
 
