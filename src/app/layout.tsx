@@ -1,13 +1,5 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
-import "./globals.css";
 import { ConvexClientProvider } from "@/providers/ConvexClientProvider";
-import { Toaster } from "@/components/ui/sonner";
-
-const inter = Inter({
-  subsets: ["latin"],
-  variable: "--font-inter",
-});
 
 export const metadata: Metadata = {
   title: "Yachad | יחד",
@@ -21,13 +13,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html suppressHydrationWarning className={inter.variable}>
-      <body className="antialiased">
-        <ConvexClientProvider>
-          {children}
-          <Toaster />
-        </ConvexClientProvider>
-      </body>
-    </html>
+    <ConvexClientProvider>
+      {children}
+    </ConvexClientProvider>
   );
 }
