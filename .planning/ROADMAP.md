@@ -32,16 +32,16 @@ Decimal phases appear between their surrounding integers in numeric order.
   1. A user can sign up, log in, and be redirected to the dashboard; an unauthenticated request to a protected route is redirected to sign-in
   2. The dashboard shell renders with RTL layout in Hebrew and switches to LTR in English — all spacing, padding, and directional elements flip correctly with no physical CSS violations
   3. Dark mode toggles and persists across page refreshes; mobile layout renders correctly at 375px viewport
-  4. Clerk roles are enforced: a regular user cannot access `/agent` or `/admin` routes; an unauthenticated API call to a Convex mutation requiring auth is rejected at the Convex function level
+  4. Clerk roles are enforced via `proxy.ts`: a regular user cannot access `/agent` or `/admin` routes; an unauthenticated API call to a Convex mutation requiring auth is rejected at the Convex function level
   5. All Convex schemas (for all 7 modules) exist with indexes defined; rate limiting is active and rejects write operations that exceed configured thresholds
-**Plans**: TBD
+**Plans**: 5 plans
 
 Plans:
-- [ ] 01-01: Next.js 15 project scaffold with TailwindCSS v4, shadcn/ui, and TypeScript — zero physical directional utilities
-- [ ] 01-02: Convex schema for all 7 modules with all production indexes and rate limiter integration
-- [ ] 01-03: Clerk three-layer auth — middleware route matchers, page guards, Convex requireUser/requireAgent/requireAdmin helpers, and Clerk-Convex webhook sync
-- [ ] 01-04: next-intl v4 locale routing, Hebrew/English message files, and `dir` attribute wired to HTML element
-- [ ] 01-05: Dashboard shell — sidebar with 7 module links, top bar (country selector, emergency button, language toggle, notifications, profile), dark mode, skeleton screens, and error boundaries
+- [ ] 01-01-PLAN.md — Next.js 16 scaffold with Turbopack, TailwindCSS v4, shadcn/ui (--rtl), provider hierarchy (Clerk + Convex + Theme), dark mode [Wave 1]
+- [ ] 01-02-PLAN.md — Convex schema for all 7 modules with production indexes, three-layer auth helpers, rate limiter, Clerk webhook sync [Wave 1]
+- [ ] 01-03-PLAN.md — Clerk three-layer auth: proxy.ts route matchers, page guards, sign-in/sign-up pages, role-gated route layouts [Wave 2]
+- [ ] 01-04-PLAN.md — next-intl v4 locale routing, Hebrew/English message files, locale layout with dir/lang attributes [Wave 2]
+- [ ] 01-05-PLAN.md — Dashboard shell: sidebar (7 modules), top bar (all controls), mobile bottom nav, emergency button, error boundaries, skeleton screens [Wave 3]
 
 ### Phase 2: Extraction Flights Marketplace
 **Goal**: Users can browse, search, and filter extraction flights, read all listing details, and initiate contact with verified agents
@@ -186,7 +186,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6 → 7 → 8 →
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. Foundation | 0/5 | Not started | - |
+| 1. Foundation | 0/5 | Planned | - |
 | 2. Extraction Flights Marketplace | 0/3 | Not started | - |
 | 3. Flight Agent Portal | 0/3 | Not started | - |
 | 4. News Aggregator | 0/3 | Not started | - |
