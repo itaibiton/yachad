@@ -15,7 +15,7 @@ Requirements for initial release. Each maps to roadmap phases.
 - [x] **FOUN-04**: Clerk-Convex webhook sync via Svix for user data in Convex
 - [ ] **FOUN-05**: Role-based proxy.ts (Next.js 16) protecting agent and admin routes
 - [x] **FOUN-06**: Hebrew-first RTL layout with `dir="rtl"` and logical CSS properties throughout
-- [ ] **FOUN-07**: English + Hebrew i18n via next-intl v4 with locale-based routing
+- [x] **FOUN-07**: English + Hebrew i18n via next-intl v4 with locale-based routing
 - [x] **FOUN-08**: Dark mode with system preference detection and manual toggle
 - [ ] **FOUN-09**: Fully responsive mobile-first design across all modules
 - [ ] **FOUN-10**: Dashboard layout with sidebar navigation (all 7 modules), top bar (country selector, emergency button, language toggle, notifications, profile)
@@ -198,7 +198,7 @@ Which phases cover which requirements. Updated during roadmap creation.
 | FOUN-04 | Phase 1 | Complete |
 | FOUN-05 | Phase 1 | Pending |
 | FOUN-06 | Phase 1 | Complete |
-| FOUN-07 | Phase 1 | Pending |
+| FOUN-07 | Phase 1 | Complete |
 | FOUN-08 | Phase 1 | Complete |
 | FOUN-09 | Phase 1 | Pending |
 | FOUN-10 | Phase 1 | Pending |

@@ -10,27 +10,27 @@ See: .planning/PROJECT.md (updated 2026-03-03)
 ## Current Position
 
 Phase: 1 of 9 (Foundation)
-Plan: 2 of 5 in current phase
-Status: Executing — Plan 01-02 complete
-Last activity: 2026-03-03 — Plan 01-02 (Convex Backend Foundation) complete. 17-table schema, three-layer auth helpers, rate limiter, Clerk webhook sync.
+Plan: 4 of 5 in current phase
+Status: Executing — Plan 01-04 complete
+Last activity: 2026-03-03 — Plan 01-04 (i18n Locale Routing) complete. next-intl v4 locale routing, bilingual Hebrew/English messages, locale layout with dynamic RTL/LTR dir attribute.
 
-Progress: [██░░░░░░░░] 4%
+Progress: [███░░░░░░░] 8%
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 2
-- Average duration: 6 min
-- Total execution time: 0.2 hours
+- Total plans completed: 4
+- Average duration: 5 min
+- Total execution time: 0.3 hours
 
 **By Phase:**
 
 | Phase | Plans | Total | Avg/Plan |
 |-------|-------|-------|----------|
-| 01-foundation | 2 | 11 min | 6 min |
+| 01-foundation | 4 | 21 min | 5 min |
 
 **Recent Trend:**
-- Last 5 plans: 01-01 (5 min), 01-02 (6 min)
+- Last 5 plans: 01-01 (5 min), 01-02 (6 min), 01-03 (6 min), 01-04 (2 min)
 - Trend: Stable
 
 *Updated after each plan completion*
@@ -60,6 +60,12 @@ Plan 01-02 decisions:
 - [01-02]: postLikes in separate table (not counter on posts) — avoids OCC contention on heavily-liked posts
 - [01-02]: convex.config.ts required to register @convex-dev/rate-limiter as a Convex component before RateLimiter can be instantiated
 
+Plan 01-04 decisions:
+- [01-04]: Root app/layout.tsx updated to pass-through (no html/body) so locale layout can own html dir and lang attributes — official next-intl App Router pattern
+- [01-04]: Toaster position adapts to locale direction: top-left for RTL (Hebrew), top-right for LTR (English)
+- [01-04]: localePrefix: "always" ensures canonical /he/ and /en/ URL prefixes — no ambiguous root URLs
+- [01-04]: Inter font variable moved to locale layout to stay scoped to the locale html element
+
 ### Pending Todos
 
 None yet.
@@ -72,5 +78,5 @@ None yet.
 ## Session Continuity
 
 Last session: 2026-03-03
-Stopped at: Completed 01-02-PLAN.md (Convex Backend Foundation)
+Stopped at: Completed 01-04-PLAN.md (i18n Locale Routing and Bilingual Messages)
 Resume file: None
