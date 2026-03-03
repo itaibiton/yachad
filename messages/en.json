@@ -81,5 +81,9 @@
     "unauthorized": "You are not authorized to view this page",
     "networkError": "Connection issue. Check your internet.",
     "rateLimited": "Too many requests. Please try again in a few minutes."
+  },
+  "modules": {
+    "comingSoon": "Coming soon",
+    "comingSoonDescription": "This module is being built. Check back soon."
   }
 }

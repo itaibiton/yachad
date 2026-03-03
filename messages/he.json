@@ -81,5 +81,9 @@
     "unauthorized": "אין לך הרשאה לצפות בדף זה",
     "networkError": "בעיית חיבור. בדוק את האינטרנט.",
     "rateLimited": "יותר מדי בקשות. נסה שוב בעוד כמה דקות."
+  },
+  "modules": {
+    "comingSoon": "בקרוב",
+    "comingSoonDescription": "מודול זה נמצא בפיתוח. חזור בקרוב."
   }
 }
