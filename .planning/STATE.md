@@ -10,28 +10,28 @@ See: .planning/PROJECT.md (updated 2026-03-03)
 ## Current Position
 
 Phase: 1 of 9 (Foundation)
-Plan: 1 of 5 in current phase
-Status: Executing — Plan 01-01 complete
-Last activity: 2026-03-03 — Plan 01-01 (Foundation Scaffold) complete. Next.js 16.1.6 with RTL-safe shadcn/ui, Clerk+Convex+Theme providers.
+Plan: 2 of 5 in current phase
+Status: Executing — Plan 01-02 complete
+Last activity: 2026-03-03 — Plan 01-02 (Convex Backend Foundation) complete. 17-table schema, three-layer auth helpers, rate limiter, Clerk webhook sync.
 
-Progress: [█░░░░░░░░░] 2%
+Progress: [██░░░░░░░░] 4%
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 1
-- Average duration: 5 min
-- Total execution time: 0.1 hours
+- Total plans completed: 2
+- Average duration: 6 min
+- Total execution time: 0.2 hours
 
 **By Phase:**
 
 | Phase | Plans | Total | Avg/Plan |
 |-------|-------|-------|----------|
-| 01-foundation | 1 | 5 min | 5 min |
+| 01-foundation | 2 | 11 min | 6 min |
 
 **Recent Trend:**
-- Last 5 plans: 01-01 (5 min)
-- Trend: —
+- Last 5 plans: 01-01 (5 min), 01-02 (6 min)
+- Trend: Stable
 
 *Updated after each plan completion*
 
@@ -54,6 +54,12 @@ Plan 01-01 decisions:
 - [01-01]: RTL animation direction classes (slide-in-from-left etc.) are exempt from logical CSS rule — only layout margin/padding must use logical equivalents
 - [01-01]: Inter font chosen over Geist scaffold default as base font for Hebrew readability
 
+Plan 01-02 decisions:
+- [01-02]: Agent isApproved checked in Convex DB on every requireAgent() call — Clerk publicMetadata.role alone is insufficient for wartime fraud prevention
+- [01-02]: deleteFromClerk soft-deletes via isBanned: true — preserves audit trail for all associated flights, posts, and messages
+- [01-02]: postLikes in separate table (not counter on posts) — avoids OCC contention on heavily-liked posts
+- [01-02]: convex.config.ts required to register @convex-dev/rate-limiter as a Convex component before RateLimiter can be instantiated
+
 ### Pending Todos
 
 None yet.
@@ -66,5 +72,5 @@ None yet.
 ## Session Continuity
 
 Last session: 2026-03-03
-Stopped at: Completed 01-01-PLAN.md (Foundation Scaffold)
+Stopped at: Completed 01-02-PLAN.md (Convex Backend Foundation)
 Resume file: None
