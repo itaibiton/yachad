@@ -20,8 +20,8 @@ Requirements for initial release. Each maps to roadmap phases.
 - [x] **FOUN-09**: Fully responsive mobile-first design across all modules
 - [x] **FOUN-10**: Dashboard layout with sidebar navigation (all 7 modules), top bar (country selector, emergency button, language toggle, notifications, profile)
 - [x] **FOUN-11**: Rate limiting on all write operations via @convex-dev/rate-limiter
-- [ ] **FOUN-12**: Error boundaries with user-friendly Hebrew/English error messages
-- [ ] **FOUN-13**: Loading states with skeleton screens on all data-fetching components
+- [x] **FOUN-12**: Error boundaries with user-friendly Hebrew/English error messages
+- [x] **FOUN-13**: Loading states with skeleton screens on all data-fetching components
 
 ### Extraction Flights
 
@@ -203,8 +203,8 @@ Which phases cover which requirements. Updated during roadmap creation.
 | FOUN-09 | Phase 1 | Complete |
 | FOUN-10 | Phase 1 | Complete |
 | FOUN-11 | Phase 1 | Complete |
-| FOUN-12 | Phase 1 | Pending |
-| FOUN-13 | Phase 1 | Pending |
+| FOUN-12 | Phase 1 | Complete |
+| FOUN-13 | Phase 1 | Complete |
 | FLIT-01 | Phase 2 | Pending |
 | FLIT-02 | Phase 2 | Pending |
 | FLIT-03 | Phase 2 | Pending |
