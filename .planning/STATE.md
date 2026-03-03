@@ -3,12 +3,12 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: unknown
-last_updated: "2026-03-03T20:55:24.218Z"
+last_updated: "2026-03-03T21:42:16.374Z"
 progress:
-  total_phases: 1
+  total_phases: 2
   completed_phases: 1
-  total_plans: 6
-  completed_plans: 6
+  total_plans: 9
+  completed_plans: 7
 ---
 
 # Project State
@@ -50,6 +50,7 @@ Progress: [██████████] 100%
 | Phase 01-foundation P03 | 3 | 2 tasks | 10 files |
 | Phase 01-foundation P05a | 8 | 3 tasks | 20 files |
 | Phase 01-foundation P05b | 7 | 2 tasks | 26 files |
+| Phase 02-extraction-flights-marketplace P01 | 2 | 2 tasks | 4 files |
 
 ## Accumulated Context
 
@@ -89,6 +90,9 @@ Plan 01-04 decisions:
 - [Phase 01-05a]: countries.ts shared data file in /src/shared/data/ created for CountrySelector and CountryOnboardingModal to share 30-country list
 - [Phase 01-foundation]: modules.comingSoon i18n namespace added to messages — plan required all text via useTranslations() but placeholder pages needed a coming soon string not previously in the message files
 - [Phase 01-foundation]: Per-module error isolation pattern established: each (dashboard)/[module]/error.tsx wraps ErrorBoundary preventing single-module failures from crashing the entire dashboard
+- [Phase 02-01]: convex-helpers filter() used for listFlights to avoid undersized pagination pages when used before .paginate()
+- [Phase 02-01]: by_country_departure index does not constrain status — status===available additionally filtered in TS when departureCountry provided
+- [Phase 02-01]: getFlightWithAgent includes agentEmail for detail panel; list queries omit it to keep card payload minimal
 
 ### Roadmap Evolution
 

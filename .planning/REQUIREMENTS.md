@@ -25,17 +25,17 @@ Requirements for initial release. Each maps to roadmap phases.
 
 ### Extraction Flights
 
-- [ ] **FLIT-01**: User can search and filter flights by departure country, destination, date range, and seats available
-- [ ] **FLIT-02**: User can view clear pricing per seat with currency display
-- [ ] **FLIT-03**: User can see flight status indicator (available / full / cancelled)
+- [x] **FLIT-01**: User can search and filter flights by departure country, destination, date range, and seats available
+- [x] **FLIT-02**: User can view clear pricing per seat with currency display
+- [x] **FLIT-03**: User can see flight status indicator (available / full / cancelled)
 - [ ] **FLIT-04**: User can contact agent via WhatsApp click-to-chat or phone number reveal
-- [ ] **FLIT-05**: User can see seat availability counter ("X seats left")
-- [ ] **FLIT-06**: User can see listing creation date and "updated X ago" timestamp
+- [x] **FLIT-05**: User can see seat availability counter ("X seats left")
+- [x] **FLIT-06**: User can see listing creation date and "updated X ago" timestamp
 - [ ] **FLIT-07**: User can view mobile-first RTL flight cards scannable in 3 seconds
-- [ ] **FLIT-08**: User can view package bundles (flight + hotel + transfer + insurance) as single listings
-- [ ] **FLIT-09**: User can see urgency badge on flights departing in less than 24 hours
-- [ ] **FLIT-10**: User can see default sort by soonest departure date
-- [ ] **FLIT-11**: User can see verified agent badge on admin-approved agents
+- [x] **FLIT-08**: User can view package bundles (flight + hotel + transfer + insurance) as single listings
+- [x] **FLIT-09**: User can see urgency badge on flights departing in less than 24 hours
+- [x] **FLIT-10**: User can see default sort by soonest departure date
+- [x] **FLIT-11**: User can see verified agent badge on admin-approved agents
 - [ ] **FLIT-12**: User can see destination country flag and city on each listing
 
 ### Flight Agent Portal
@@ -205,17 +205,17 @@ Which phases cover which requirements. Updated during roadmap creation.
 | FOUN-11 | Phase 1 | Complete |
 | FOUN-12 | Phase 1 | Complete |
 | FOUN-13 | Phase 1 | Complete |
-| FLIT-01 | Phase 2 | Pending |
-| FLIT-02 | Phase 2 | Pending |
-| FLIT-03 | Phase 2 | Pending |
+| FLIT-01 | Phase 2 | Complete |
+| FLIT-02 | Phase 2 | Complete |
+| FLIT-03 | Phase 2 | Complete |
 | FLIT-04 | Phase 2 | Pending |
-| FLIT-05 | Phase 2 | Pending |
-| FLIT-06 | Phase 2 | Pending |
+| FLIT-05 | Phase 2 | Complete |
+| FLIT-06 | Phase 2 | Complete |
 | FLIT-07 | Phase 2 | Pending |
-| FLIT-08 | Phase 2 | Pending |
-| FLIT-09 | Phase 2 | Pending |
-| FLIT-10 | Phase 2 | Pending |
-| FLIT-11 | Phase 2 | Pending |
+| FLIT-08 | Phase 2 | Complete |
+| FLIT-09 | Phase 2 | Complete |
+| FLIT-10 | Phase 2 | Complete |
+| FLIT-11 | Phase 2 | Complete |
 | FLIT-12 | Phase 2 | Pending |
 | AGNT-01 | Phase 3 | Pending |
 | AGNT-02 | Phase 3 | Pending |
