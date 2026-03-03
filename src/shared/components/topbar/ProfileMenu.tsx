@@ -20,10 +20,10 @@ export function ProfileMenu() {
   const { user } = useUser();
   const { signOut } = useClerk();
 
+  const nameInitials =
+    (user?.firstName?.[0] ?? "") + (user?.lastName?.[0] ?? "");
   const initials =
-    (user?.firstName?.[0] ?? "") + (user?.lastName?.[0] ?? "") ||
-    user?.username?.[0]?.toUpperCase() ??
-    "U";
+    nameInitials || (user?.username?.[0]?.toUpperCase() ?? "U");
 
   const displayName =
     user?.fullName ?? user?.username ?? user?.primaryEmailAddress?.emailAddress ?? "User";

@@ -62,7 +62,7 @@ export function SidebarNavItem({
       <TooltipProvider>
         <Tooltip>
           <TooltipTrigger asChild>{button}</TooltipTrigger>
-          <TooltipContent side="end">
+          <TooltipContent side="right">
             <p>{label}</p>
           </TooltipContent>
         </Tooltip>
