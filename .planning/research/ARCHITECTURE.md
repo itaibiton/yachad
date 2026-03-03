@@ -72,7 +72,7 @@
 
 | Component | Responsibility | Communicates With |
 |-----------|---------------|-------------------|
-| Clerk Middleware (`middleware.ts`) | Route protection, role enforcement at the edge before page renders | Next.js router, Clerk JWT |
+| Clerk Proxy (`proxy.ts`) | Route protection, role enforcement before page renders (Node.js runtime in Next.js 16) | Next.js router, Clerk JWT |
 | Next.js Server Components (RSC) | Initial HTML render, preload data for hydration, SEO | Convex `fetchQuery` / `preloadQuery`, Clerk `auth()` |
 | Next.js Client Components | Interactivity, real-time subscriptions, forms, maps | Convex `useQuery` / `useMutation`, Zustand, Browser APIs |
 | Next.js Server Actions | Validated mutations from forms, thin orchestration layer | Convex `fetchMutation` / `fetchAction` |
@@ -205,7 +205,7 @@ yachad-global/
 │   │   │   └── i18n.ts              # next-intl config
 │   │   └── types/                   # Shared TypeScript types (from convex/_generated)
 │   │
-│   └── middleware.ts                # Clerk auth guard + locale redirect
+│   └── proxy.ts                     # Clerk auth guard + locale redirect (Next.js 16)
 │
 ├── messages/
 │   ├── he.json                      # Hebrew translations
@@ -311,11 +311,11 @@ export const createFlight = mutation({
 
 **When to use:** All role-based access decisions. Admins set roles via the Clerk Dashboard or admin API; the Convex user record syncs on next login via a `upsertUser` mutation called from the app.
 
-**Trade-offs:** Dual-write complexity, but provides fast middleware checks (Clerk) AND backend enforcement (Convex) without an extra DB round-trip on every request.
+**Trade-offs:** Dual-write complexity, but provides fast proxy checks (Clerk) AND backend enforcement (Convex) without an extra DB round-trip on every request.
 
 **Example:**
 ```typescript
-// middleware.ts
+// proxy.ts (Next.js 16 — replaces middleware.ts)
 import { clerkMiddleware, createRouteMatcher } from "@clerk/nextjs/server";
 
 const isAgentRoute = createRouteMatcher(["/*/agent(.*)"]);
@@ -469,7 +469,7 @@ News query subscriptions invalidated → clients update
 ```
 Request hits /he/... or /en/...
      ↓
-middleware.ts: detectLocale() → sets locale cookie
+proxy.ts: detectLocale() → sets locale cookie
      ↓
 app/[locale]/layout.tsx (Server Component)
   → getMessages(locale) → loads he.json or en.json
@@ -587,7 +587,7 @@ The component dependency graph dictates this build sequence:
 **Phase 1 — Foundation (blocks everything):**
 1. Convex schema + indexes for all 7 modules (cannot add breaking index changes safely in production)
 2. `convex/lib/auth.ts` (every module needs this)
-3. Clerk + Convex provider setup + `middleware.ts` (all routes need auth)
+3. Clerk + Convex provider setup + `proxy.ts` (all routes need auth)
 4. next-intl + RTL layout (all pages need locale wrapping)
 
 **Phase 2 — Core User Experience (drives adoption):**

@@ -462,7 +462,7 @@ Module 6 (Reservations)
 | Authentication (sign up / sign in) | Every user action requires identity | LOW | Clerk; social login (Google) recommended for Israeli users |
 | Hebrew RTL layout | Primary language of users; any LTR Hebrew feels broken | MEDIUM | TailwindCSS `dir="rtl"` + `font-family` for Hebrew; shadcn/ui RTL compatibility |
 | Mobile-responsive UI | Mobile-heavy usage in crisis; desktop is secondary | MEDIUM | TailwindCSS responsive prefixes; test on iPhone |
-| Role-based route protection | Agents and admins must not access each other's portals | LOW | Clerk middleware + Next.js middleware.ts |
+| Role-based route protection | Agents and admins must not access each other's portals | LOW | Clerk middleware + Next.js proxy.ts (Next.js 16) |
 | Dark mode | Project requirement; expected by Israeli tech users | LOW | Tailwind `dark:` classes + system preference detection |
 | Loading states | Real-time app has latency; skeleton screens prevent "broken" perception | LOW | shadcn/ui Skeleton component |
 | Error handling with user-friendly messages | Network failures happen; generic errors = panic in crisis | LOW | Error boundary + toast notifications |

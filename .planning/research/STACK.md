@@ -12,11 +12,11 @@
 
 | Technology | Version | Purpose | Why Recommended |
 |------------|---------|---------|-----------------|
-| Next.js | 15.x (App Router) | Full-stack React framework | Mandatory. App Router enables React Server Components, route-level streaming, and per-route edge/Node runtime selection. Next.js 15 is stable and works with React 19. Use `next@latest`. |
+| Next.js | 16.x (App Router) | Full-stack React framework | Mandatory. App Router with Turbopack as default bundler, React Server Components, Cache Components, route-level streaming, and `proxy.ts` (replaces middleware.ts). Next.js 16 is stable and works with React 19.2. Use `next@latest`. |
 | TypeScript | 5.9.x | Type safety | Mandatory. Convex, Clerk, and next-intl all ship first-class TypeScript types. Minimum TS 5 required for next-intl v4. |
-| TailwindCSS | 4.2.x | Utility-first CSS | Mandatory. v4 is stable with shadcn and Next.js 15 as of early 2025. Use CSS logical properties (`ms-`, `me-`, `ps-`, `pe-`) natively — no RTL plugin needed for v4. |
+| TailwindCSS | 4.2.x | Utility-first CSS | Mandatory. v4 is stable with shadcn and Next.js 16. Use CSS logical properties (`ms-`, `me-`, `ps-`, `pe-`) natively — no RTL plugin needed for v4. |
 | shadcn/ui | latest CLI | Component library | Mandatory. Copy-paste component model, not a library dep. Install via `npx shadcn@latest init`. Use Tailwind v4 init path for new projects. |
-| Clerk (`@clerk/nextjs`) | 6.x (6.39+) | Auth, roles, middleware | Mandatory. v6 supports Next.js 15 and React 19. Provides `clerkMiddleware()`, role-based RBAC via `publicMetadata`, JWT session tokens. ClerkProvider must wrap ConvexClientProvider. |
+| Clerk (`@clerk/nextjs`) | 6.x (6.39+) | Auth, roles, proxy | Mandatory. v6.35+ supports Next.js 16 and React 19.2. Provides `clerkMiddleware()` (used in `proxy.ts`), role-based RBAC via `publicMetadata`, JWT session tokens. ClerkProvider must wrap ConvexClientProvider. |
 | Convex (`convex`) | 1.32.x | Database + realtime + backend functions | Mandatory. Built-in reactive subscriptions with sub-50ms latency. Scales to billions of docs. TypeScript-first schema and query definitions. Use `ConvexProviderWithClerk` from `convex/react-clerk`. |
 | Zustand | 5.x | Client-side state | Mandatory. Zero-boilerplate atom-based state. Use for UI state (modal visibility, locale preference, map viewport state) not for server data (Convex handles that). |
 
@@ -24,7 +24,7 @@
 
 | Library | Version | Purpose | When to Use |
 |---------|---------|---------|-------------|
-| `@clerk/nextjs` | 6.39+ | Auth, sessions, organizations | Always — core dependency. Use `clerkMiddleware()` in `middleware.ts` to protect routes. |
+| `@clerk/nextjs` | 6.39+ | Auth, sessions, organizations | Always — core dependency. Use `clerkMiddleware()` in `proxy.ts` (Next.js 16 convention, replaces `middleware.ts`) to protect routes. |
 | `svix` | 1.86+ | Clerk webhook signature verification | Required. Clerk sends all webhooks through Svix. Use in Convex HTTP action to validate `svix-id`, `svix-timestamp`, `svix-signature` headers and sync users to Convex. |
 | `convex/react-clerk` | (part of `convex` 1.32+) | Clerk-Convex bridge | Always. Exports `ConvexProviderWithClerk` which automatically passes Clerk JWT to Convex for auth validation. |
 
@@ -130,7 +130,7 @@ Practical approach with `@vis.gl/react-google-maps`: use `useMapsLibrary('places
 ## Installation
 
 ```bash
-# Core framework (Next.js 15 + React 19 + TypeScript + Tailwind v4)
+# Core framework (Next.js 16 + React 19.2 + TypeScript + Tailwind v4 + Turbopack)
 npx create-next-app@latest yachad-global --typescript --tailwind --app --src-dir --import-alias "@/*"
 
 # Initialize shadcn (Tailwind v4 path)
@@ -226,7 +226,7 @@ npm install -D @types/web-push
 
 **For authenticated Convex mutations:**
 - Always use `ctx.auth.getUserIdentity()` inside mutations and queries to enforce auth server-side
-- Do NOT add `auth: "required"` only at the middleware level — Convex functions must also verify
+- Do NOT add `auth: "required"` only at the proxy level — Convex functions must also verify
 
 **For agent-only actions (flight listings):**
 - Check `publicMetadata.role === 'agent'` inside the Convex mutation after `getUserIdentity()`
@@ -243,11 +243,11 @@ npm install -D @types/web-push
 
 | Package | Compatible With | Notes |
 |---------|-----------------|-------|
-| `next@15.x` | `react@19.x`, `react-dom@19.x` | App Router, React 19, stable as of 2025. |
-| `@clerk/nextjs@6.x` | `next@15.x`, `react@19.x` | v6 required for Next.js 15. v5 does not support React 19. |
-| `convex@1.32.x` | `next@15.x`, `@clerk/nextjs@6.x` | `ConvexProviderWithClerk` from `convex/react-clerk`. Requires `useAuth` from `@clerk/nextjs`. |
-| `next-intl@4.x` | `next@15.x`, `typescript@5+` | v4 requires TypeScript 5+. Minimum TS version is enforced. |
-| `tailwindcss@4.x` + `shadcn@latest` | `next@15.x` | Use `npx shadcn@latest init` — it detects Tailwind v4 and configures appropriately. Do NOT use `shadcn@2.3.0` (that is for v3). |
+| `next@16.x` | `react@19.2.x`, `react-dom@19.2.x` | App Router, React 19.2, Turbopack default, stable as of Oct 2025. |
+| `@clerk/nextjs@6.x` | `next@16.x`, `react@19.2.x` | v6.35+ required for Next.js 16. Use `clerkMiddleware()` in `proxy.ts`. |
+| `convex@1.32.x` | `next@16.x`, `@clerk/nextjs@6.x` | `ConvexProviderWithClerk` from `convex/react-clerk`. Requires `useAuth` from `@clerk/nextjs`. |
+| `next-intl@4.x` | `next@16.x`, `typescript@5+` | v4 requires TypeScript 5+. Middleware config goes in `proxy.ts` for Next.js 16. |
+| `tailwindcss@4.x` + `shadcn@latest` | `next@16.x` | Use `npx shadcn@latest init` — it detects Tailwind v4 and configures appropriately. Do NOT use `shadcn@2.3.0` (that is for v3). |
 | `@vis.gl/react-google-maps@1.7.x` | `react@18.x` and `react@19.x` | Actively maintained. Client Component only (cannot use in RSC). |
 | `@tiptap/react@3.x` | `react@18.x` and `react@19.x` | v3 is the current stable. Client Component only. |
 | `svix@1.86.x` | Node.js runtime | Used in Convex HTTP actions which run in the Convex Node.js runtime. |
@@ -260,14 +260,14 @@ npm install -D @types/web-push
 
 | Layer | Service | Notes |
 |-------|---------|-------|
-| Frontend (Next.js) | Vercel | First-class Next.js support. App Router, Edge Network, ISR, serverless functions. Connect GitHub repo for auto-deploy. |
+| Frontend (Next.js) | Vercel | First-class Next.js 16 support. App Router, Turbopack, Edge Network, Cache Components, serverless functions. Connect GitHub repo for auto-deploy. |
 | Backend / Database | Convex Cloud | Convex manages its own hosting. `npx convex deploy` on merge to main. Environment variables set in Convex dashboard. |
 | Auth | Clerk (hosted) | No self-hosting. Configure JWT template in Clerk dashboard to expose `role` claim. Set webhook endpoint to Convex HTTP action URL (`.convex.site/clerk-users-webhook`). |
 | Maps / Places | Google Cloud | Enable: Maps JavaScript API, Places API (New). Restrict API key to your domain(s) in production. |
 | Image CDN | Convex file storage (built-in) | Files served from `*.convex.cloud`. Add to `next.config.js` `images.remotePatterns`. |
 
-**Edge vs Node.js runtime on Vercel:**
-- Use Edge runtime for locale-aware middleware (`middleware.ts`) — fast, globally distributed.
+**Proxy and runtime on Vercel:**
+- `proxy.ts` (Next.js 16) runs on Node.js runtime — Edge runtime is NOT supported in proxy. This is a change from Next.js 15's `middleware.ts` which ran on Edge.
 - Use Node.js serverless for API routes that require `rss-parser` or `web-push` (both are Node.js-only libraries).
 - Convex functions run in Convex's own runtime — not Vercel's. Next.js code that calls Convex via HTTP does so from the client or from server-rendered components.
 

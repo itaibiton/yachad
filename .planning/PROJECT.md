@@ -62,7 +62,7 @@ Get stranded Israelis home safely by connecting them with extraction flights, cr
 
 ## Constraints
 
-- **Tech Stack**: Next.js 14+ (App Router), TypeScript, TailwindCSS, shadcn/ui, Clerk, Convex, Google Maps/Places API, Zustand — all mandatory
+- **Tech Stack**: Next.js 16+ (App Router, Turbopack), TypeScript, TailwindCSS, shadcn/ui, Clerk, Convex, Google Maps/Places API, Zustand — all mandatory
 - **Performance**: Must handle 10K-50K day-one users, architect for 500K concurrent
 - **Language**: Hebrew-first design, full RTL support, English as secondary language
 - **Urgency**: Active crisis — ship fast but build properly (no throwaway code)

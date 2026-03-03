@@ -189,7 +189,7 @@ Additionally, the CVE-2025-29927 vulnerability allowed attackers to bypass Next.
 The mental model from Pages Router (middleware = complete protection) does not translate 1:1 to App Router. Layout-level auth checks are not re-evaluated on every navigation. Middleware is not a complete security boundary.
 
 **How to avoid:**
-- Auth checks must happen at three independent layers: (1) clerkMiddleware in `middleware.ts` for route protection, (2) Server Component auth check on each page (not just layout), (3) Convex backend function auth validation
+- Auth checks must happen at three independent layers: (1) clerkMiddleware in `proxy.ts` (Next.js 16) for route protection, (2) Server Component auth check on each page (not just layout), (3) Convex backend function auth validation
 - Never rely on any single layer as the sole security gate
 - Strip or block `x-middleware-subrequest` at the CDN/edge before requests reach Next.js
 - Route-protect in `clerkMiddleware` using explicit route matchers, not default-public behavior (Clerk middleware makes all routes public by default — opt-in protection is a footgun)
@@ -215,7 +215,7 @@ Shortcuts that seem reasonable but create long-term problems.
 | RTL as a CSS afterthought | Ship faster in LTR first | Multi-week retrofit; every component needs physical-to-logical property audit | Never — Hebrew is the primary language |
 | Google Maps client-side fetch per user | Simple implementation | Cost explosion; no caching possible | Only for MVP with <100 users and billing cap |
 | Agent role from Clerk metadata alone | Fast to implement | Bypassed if Convex backend doesn't double-check DB approval status | Never for security-critical role checks |
-| Single `middleware.ts` auth layer | Less code | Single point of failure; bypassed by direct API/Convex calls | Never — defense in depth required |
+| Single `proxy.ts` auth layer | Less code | Single point of failure; bypassed by direct API/Convex calls | Never — defense in depth required |
 | Auto-publish all RSS items | Zero admin overhead | Misinformation laundering; no retraction path | Never during active crisis |
 | English-first UI with Hebrew "translation" | Faster development | RTL layout breaks everywhere; Hebrew content overflows LTR containers | Never — Hebrew-first means Hebrew-first |
 
