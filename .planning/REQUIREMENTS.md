@@ -28,25 +28,25 @@ Requirements for initial release. Each maps to roadmap phases.
 - [x] **FLIT-01**: User can search and filter flights by departure country, destination, date range, and seats available
 - [x] **FLIT-02**: User can view clear pricing per seat with currency display
 - [x] **FLIT-03**: User can see flight status indicator (available / full / cancelled)
-- [ ] **FLIT-04**: User can contact agent via WhatsApp click-to-chat or phone number reveal
+- [x] **FLIT-04**: User can contact agent via WhatsApp click-to-chat or phone number reveal
 - [x] **FLIT-05**: User can see seat availability counter ("X seats left")
 - [x] **FLIT-06**: User can see listing creation date and "updated X ago" timestamp
-- [ ] **FLIT-07**: User can view mobile-first RTL flight cards scannable in 3 seconds
+- [x] **FLIT-07**: User can view mobile-first RTL flight cards scannable in 3 seconds
 - [x] **FLIT-08**: User can view package bundles (flight + hotel + transfer + insurance) as single listings
 - [x] **FLIT-09**: User can see urgency badge on flights departing in less than 24 hours
 - [x] **FLIT-10**: User can see default sort by soonest departure date
 - [x] **FLIT-11**: User can see verified agent badge on admin-approved agents
-- [ ] **FLIT-12**: User can see destination country flag and city on each listing
+- [x] **FLIT-12**: User can see destination country flag and city on each listing
 
 ### Flight Agent Portal
 
-- [ ] **AGNT-01**: Agent can create a new flight listing with departure/arrival, price, seats, contact, and departure date
-- [ ] **AGNT-02**: Agent can create package listing with flight + hotel + transfer + insurance components
-- [ ] **AGNT-03**: Agent can edit any field on their existing listings
-- [ ] **AGNT-04**: Agent can delete their listings (soft delete)
-- [ ] **AGNT-05**: Agent can mark a flight as "Full" with one tap
-- [ ] **AGNT-06**: Agent can view dashboard of all their listings with status badges
-- [ ] **AGNT-07**: Agent can see contact inquiry count per listing (how many users clicked contact)
+- [x] **AGNT-01**: Agent can create a new flight listing with departure/arrival, price, seats, contact, and departure date
+- [x] **AGNT-02**: Agent can create package listing with flight + hotel + transfer + insurance components
+- [x] **AGNT-03**: Agent can edit any field on their existing listings
+- [x] **AGNT-04**: Agent can delete their listings (soft delete)
+- [x] **AGNT-05**: Agent can mark a flight as "Full" with one tap
+- [x] **AGNT-06**: Agent can view dashboard of all their listings with status badges
+- [x] **AGNT-07**: Agent can see contact inquiry count per listing (how many users clicked contact)
 
 ### Jewish Services Locator
 
@@ -65,16 +65,16 @@ Requirements for initial release. Each maps to roadmap phases.
 
 ### Live News Aggregator
 
-- [ ] **NEWS-01**: User can view chronological news feed from multiple Israeli sources
-- [ ] **NEWS-02**: User can see source attribution (outlet name + favicon) on each article
+- [x] **NEWS-01**: User can view chronological news feed from multiple Israeli sources
+- [x] **NEWS-02**: User can see source attribution (outlet name + favicon) on each article
 - [ ] **NEWS-03**: User can see urgent alert banner pinned above the news feed (admin-created, dismissible)
-- [ ] **NEWS-04**: System aggregates 10-20 RSS feeds with deduplication
+- [x] **NEWS-04**: System aggregates 10-20 RSS feeds with deduplication
 - [ ] **NEWS-05**: User can tap article to open original source in new tab
-- [ ] **NEWS-06**: User can see Hebrew and English sources with language badge
-- [ ] **NEWS-07**: News feed auto-refreshes every 5-10 minutes with "last updated" indicator
-- [ ] **NEWS-08**: Admin can promote/pin stories marked as "Important" with badge
-- [ ] **NEWS-09**: Each source displays trust tier badge: Official / Verified / Community
-- [ ] **NEWS-10**: User can filter news by country relevance
+- [x] **NEWS-06**: User can see Hebrew and English sources with language badge
+- [x] **NEWS-07**: News feed auto-refreshes every 5-10 minutes with "last updated" indicator
+- [x] **NEWS-08**: Admin can promote/pin stories marked as "Important" with badge
+- [x] **NEWS-09**: Each source displays trust tier badge: Official / Verified / Community
+- [x] **NEWS-10**: User can filter news by country relevance
 
 ### Social Community Feed
 
@@ -208,15 +208,15 @@ Which phases cover which requirements. Updated during roadmap creation.
 | FLIT-01 | Phase 2 | Complete |
 | FLIT-02 | Phase 2 | Complete |
 | FLIT-03 | Phase 2 | Complete |
-| FLIT-04 | Phase 2 | Pending |
+| FLIT-04 | Phase 2 | Complete |
 | FLIT-05 | Phase 2 | Complete |
 | FLIT-06 | Phase 2 | Complete |
-| FLIT-07 | Phase 2 | Pending |
+| FLIT-07 | Phase 2 | Complete |
 | FLIT-08 | Phase 2 | Complete |
 | FLIT-09 | Phase 2 | Complete |
 | FLIT-10 | Phase 2 | Complete |
 | FLIT-11 | Phase 2 | Complete |
-| FLIT-12 | Phase 2 | Pending |
+| FLIT-12 | Phase 2 | Complete |
 | AGNT-01 | Phase 3 | Pending |
 | AGNT-02 | Phase 3 | Pending |
 | AGNT-03 | Phase 3 | Pending |
@@ -236,16 +236,16 @@ Which phases cover which requirements. Updated during roadmap creation.
 | MAPS-10 | Phase 5 | Pending |
 | MAPS-11 | Phase 5 | Pending |
 | MAPS-12 | Phase 5 | Pending |
-| NEWS-01 | Phase 4 | Pending |
-| NEWS-02 | Phase 4 | Pending |
+| NEWS-01 | Phase 4 | Complete |
+| NEWS-02 | Phase 4 | Complete |
 | NEWS-03 | Phase 4 | Pending |
-| NEWS-04 | Phase 4 | Pending |
+| NEWS-04 | Phase 4 | Complete |
 | NEWS-05 | Phase 4 | Pending |
-| NEWS-06 | Phase 4 | Pending |
-| NEWS-07 | Phase 4 | Pending |
-| NEWS-08 | Phase 4 | Pending |
-| NEWS-09 | Phase 4 | Pending |
-| NEWS-10 | Phase 4 | Pending |
+| NEWS-06 | Phase 4 | Complete |
+| NEWS-07 | Phase 4 | Complete |
+| NEWS-08 | Phase 4 | Complete |
+| NEWS-09 | Phase 4 | Complete |
+| NEWS-10 | Phase 4 | Complete |
 | FEED-01 | Phase 6 | Pending |
 | FEED-02 | Phase 6 | Pending |
 | FEED-03 | Phase 6 | Pending |

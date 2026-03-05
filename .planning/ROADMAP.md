@@ -14,7 +14,7 @@ Decimal phases appear between their surrounding integers in numeric order.
 
 - [x] **Phase 1: Foundation** - Security, schema, auth, RTL design system, and i18n infrastructure (completed 2026-03-03)
 - [x] **Phase 2: Extraction Flights Marketplace** - Users can discover and contact agents for extraction flights (completed 2026-03-03)
-- [ ] **Phase 3: Flight Agent Portal** - Agents can manage their listings through a dedicated dashboard
+- [x] **Phase 3: Flight Agent Portal** - Agents can manage their listings through a dedicated dashboard (completed 2026-03-05)
 - [ ] **Phase 4: News Aggregator** - Users can monitor live news and urgent crisis alerts
 - [ ] **Phase 5: Jewish Services Map** - Users can locate Jewish services and embassies near their position
 - [ ] **Phase 6: Social Community Feed** - Users can post, react, and coordinate in real time
@@ -188,8 +188,8 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6 → 7 → 8 →
 |-------|----------------|--------|-----------|
 | 1. Foundation | 6/6 | Complete   | 2026-03-03 |
 | 2. Extraction Flights Marketplace | 3/3 | Complete   | 2026-03-03 |
-| 3. Flight Agent Portal | 0/3 | Not started | - |
-| 4. News Aggregator | 0/3 | Not started | - |
+| 3. Flight Agent Portal | 3/3 | Complete   | 2026-03-05 |
+| 4. News Aggregator | 1/3 | In Progress|  |
 | 5. Jewish Services Map | 0/3 | Not started | - |
 | 6. Social Community Feed | 0/3 | Not started | - |
 | 7. Chat System | 0/3 | Not started | - |

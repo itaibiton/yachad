@@ -3,12 +3,12 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: unknown
-last_updated: "2026-03-03T21:56:22.772Z"
+last_updated: "2026-03-05T10:51:44.244Z"
 progress:
   total_phases: 3
-  completed_phases: 3
+  completed_phases: 2
   total_plans: 12
-  completed_plans: 12
+  completed_plans: 10
 ---
 
 # Project State
@@ -53,6 +53,7 @@ Progress: [██████████] 100%
 | Phase 02-extraction-flights-marketplace P01 | 2 | 2 tasks | 4 files |
 | Phase 02 P02 | 3 | 2 tasks | 3 files |
 | Phase 02 P03 | 4 | 2 tasks | 5 files |
+| Phase 04-news-aggregator P01 | 12 | 2 tasks | 8 files |
 
 ## Accumulated Context
 
@@ -102,6 +103,9 @@ Plan 01-04 decisions:
 - [Phase 02-03]: native HTML select used instead of shadcn Select — no select.tsx in project; accessible and consistent with design system
 - [Phase 02-03]: as unknown as FlightWithAgent cast in FlightsGrid/UrgentFlightsSection — Convex returns agentImageUrl: string | null vs optional in type; null and undefined both falsy so cast is safe
 - [Phase 02-03]: preloadQuery omitted for listFlights — Convex does not support preloadQuery with pagination; usePaginatedQuery handles first page reactively
+- [Phase 04-01]: listActiveSources exported as internalQuery — only called by fetchRssFeeds action, not public-facing
+- [Phase 04-01]: actions.ts isolated with use node directive — Convex restriction: node-runtime files contain only actions; queries and mutations in separate V8 files
+- [Phase 04-01]: upsertArticles accepts sourceId as string from Node.js action, cast to Id<newsSources> at insert time — bridges node/V8 runtime type boundary
 
 ### Roadmap Evolution
 
