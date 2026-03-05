@@ -1,6 +1,6 @@
 "use client";
 
-import { Home, Plane, Newspaper, MapPin, Users, MessageSquare, Hotel, PanelLeftIcon } from "lucide-react";
+import { Plane, Newspaper, MapPin, Users, MessageSquare, Hotel, PanelLeftIcon } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
@@ -9,13 +9,12 @@ import { SidebarNavItem } from "./SidebarNavItem";
 import { useAppStore } from "@/stores/appStore";
 import { useDirection } from "@/shared/hooks/useDirection";
 
-// Module navigation links in crisis priority order per CONTEXT.md
+// Module navigation links — feed is the main page
 const NAV_ITEMS = [
-  { href: "/overview", icon: Home, labelKey: "home" },
+  { href: "/feed", icon: Users, labelKey: "feed" },
   { href: "/flights", icon: Plane, labelKey: "flights" },
   { href: "/news", icon: Newspaper, labelKey: "news" },
   { href: "/map", icon: MapPin, labelKey: "map" },
-  { href: "/feed", icon: Users, labelKey: "feed" },
   { href: "/chat", icon: MessageSquare, labelKey: "chat" },
   { href: "/reservations", icon: Hotel, labelKey: "reservations" },
 ] as const;

@@ -56,6 +56,14 @@ export const createFlight = mutation({
     checkedBagKg: v.optional(v.number()),
     carryOnAllowed: v.optional(v.boolean()),
     personalItemAllowed: v.optional(v.boolean()),
+    luggage: v.optional(
+      v.array(
+        v.object({
+          type: v.string(),
+          weightKg: v.optional(v.number()),
+        })
+      )
+    ),
     stops: v.optional(
       v.array(
         v.object({
@@ -82,6 +90,9 @@ export const createFlight = mutation({
     if (args.departureDate < Date.now() - 60 * 60 * 1000) {
       throw new Error("Departure date cannot be in the past");
     }
+    if (args.arrivalDate && args.arrivalDate < args.departureDate) {
+      throw new Error("Arrival date cannot be before departure date");
+    }
 
     const flightId = await ctx.db.insert("flights", {
       agentId: agent._id,
@@ -102,6 +113,7 @@ export const createFlight = mutation({
       checkedBagKg: args.checkedBagKg,
       carryOnAllowed: args.carryOnAllowed,
       personalItemAllowed: args.personalItemAllowed,
+      luggage: args.luggage,
       stops: args.stops,
       isPackage: args.isPackage,
       hotelIncluded: args.hotelIncluded,
@@ -142,6 +154,14 @@ export const updateFlight = mutation({
     checkedBagKg: v.optional(v.number()),
     carryOnAllowed: v.optional(v.boolean()),
     personalItemAllowed: v.optional(v.boolean()),
+    luggage: v.optional(
+      v.array(
+        v.object({
+          type: v.string(),
+          weightKg: v.optional(v.number()),
+        })
+      )
+    ),
     stops: v.optional(
       v.array(
         v.object({
@@ -239,5 +259,38 @@ export const updateFlightStatus = mutation({
     }
 
     await ctx.db.patch(args.flightId, { status: args.status });
+  },
+});
+
+/**
+ * toggleSaveFlight — save or unsave a flight for the authenticated user.
+ *
+ * If the flight is already saved, removes it. Otherwise, saves it.
+ * Returns { saved: boolean } indicating the new state.
+ */
+export const toggleSaveFlight = mutation({
+  args: {
+    flightId: v.id("flights"),
+  },
+  handler: async (ctx, args) => {
+    const user = await requireUser(ctx);
+
+    const existing = await ctx.db
+      .query("savedFlights")
+      .withIndex("by_user_flight", (q) =>
+        q.eq("userId", user._id).eq("flightId", args.flightId)
+      )
+      .unique();
+
+    if (existing) {
+      await ctx.db.delete(existing._id);
+      return { saved: false };
+    }
+
+    await ctx.db.insert("savedFlights", {
+      userId: user._id,
+      flightId: args.flightId,
+    });
+    return { saved: true };
   },
 });

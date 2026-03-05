@@ -6,6 +6,11 @@ import { Button } from "@/components/ui/button";
 import { CountryCombobox } from "@/shared/components/CountryCombobox";
 import { Plus, Trash2 } from "lucide-react";
 
+export interface LuggageItem {
+  type: string;
+  weightKg: string;
+}
+
 export interface FlightFormState {
   departureCountry: string;
   departureCity: string;
@@ -21,9 +26,13 @@ export interface FlightFormState {
   description: string;
   whatsappNumber: string;
   phoneNumber: string;
+  // Legacy luggage fields (kept for backward compat)
   checkedBagKg: string;
   carryOnAllowed: boolean;
   personalItemAllowed: boolean;
+  // New structured luggage
+  luggage: LuggageItem[];
+  // Package fields kept in interface for backward compat but removed from UI
   isPackage: boolean;
   hotelIncluded: string;
   transferIncluded: string;
@@ -58,6 +67,7 @@ export function createEmptyFlightForm(
     checkedBagKg: "",
     carryOnAllowed: false,
     personalItemAllowed: false,
+    luggage: [],
     isPackage: false,
     hotelIncluded: "",
     transferIncluded: "",
@@ -67,6 +77,15 @@ export function createEmptyFlightForm(
 
 const CURRENCIES = ["USD", "EUR", "ILS", "GBP", "CAD", "AUD"];
 
+const LUGGAGE_TYPES = [
+  "Checked Bag",
+  "Carry-on",
+  "Personal Item",
+  "Oversize Bag",
+  "Sports Equipment",
+  "Other",
+];
+
 interface FlightFormFieldsProps {
   form: FlightFormState;
   stops: FlightStop[];
@@ -74,6 +93,10 @@ interface FlightFormFieldsProps {
   addStop: () => void;
   removeStop: (index: number) => void;
   updateStop: (index: number, field: keyof FlightStop, value: string) => void;
+  luggage: LuggageItem[];
+  addLuggage: () => void;
+  removeLuggage: (index: number) => void;
+  updateLuggage: (index: number, field: keyof LuggageItem, value: string) => void;
 }
 
 export function FlightFormFields({
@@ -83,6 +106,10 @@ export function FlightFormFields({
   addStop,
   removeStop,
   updateStop,
+  luggage,
+  addLuggage,
+  removeLuggage,
+  updateLuggage,
 }: FlightFormFieldsProps) {
   const t = useTranslations("agent");
 
@@ -210,8 +237,12 @@ export function FlightFormFields({
               type="datetime-local"
               value={form.arrivalDate}
               onChange={(e) => updateField("arrivalDate", e.target.value)}
+              min={form.departureDate || undefined}
               dir="ltr"
             />
+            {form.arrivalDate && form.departureDate && form.arrivalDate < form.departureDate && (
+              <p className="text-xs text-red-500">{t("arrivalBeforeDeparture")}</p>
+            )}
           </div>
         </div>
       </fieldset>
@@ -274,50 +305,48 @@ export function FlightFormFields({
         <legend className="text-sm font-semibold text-muted-foreground uppercase tracking-wider">
           {t("formLuggage")}
         </legend>
-        <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
-          <div className="space-y-1.5">
-            <label htmlFor="checkedBagKg" className="block text-sm font-medium">
-              {t("checkedBagKg")}
-            </label>
-            <Input
-              id="checkedBagKg"
-              type="number"
-              min={0}
-              value={form.checkedBagKg}
-              onChange={(e) => updateField("checkedBagKg", e.target.value)}
-            />
-          </div>
-          <div className="flex items-end">
-            <div className="flex items-center gap-2 h-9">
-              <input
-                id="carryOnAllowed"
-                type="checkbox"
-                checked={form.carryOnAllowed}
-                onChange={(e) => updateField("carryOnAllowed", e.target.checked)}
-                className="size-4 rounded border-gray-300"
-              />
-              <label htmlFor="carryOnAllowed" className="block text-sm font-medium">
-                {t("carryOnAllowed")}
-              </label>
+        {luggage.map((item, index) => (
+          <div key={index} className="flex items-end gap-3">
+            <div className="flex-1 space-y-1.5">
+              <label className="block text-sm font-medium">{t("luggageType")}</label>
+              <select
+                value={item.type}
+                onChange={(e) => updateLuggage(index, "type", e.target.value)}
+                className="flex h-9 w-full rounded-md border border-input bg-transparent px-3 py-1 text-sm shadow-sm transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring"
+              >
+                <option value="">{t("selectLuggageType")}</option>
+                {LUGGAGE_TYPES.map((lt) => (
+                  <option key={lt} value={lt}>
+                    {t(`luggageType_${lt.replace(/\s+/g, "")}`)}
+                  </option>
+                ))}
+              </select>
             </div>
-          </div>
-          <div className="flex items-end">
-            <div className="flex items-center gap-2 h-9">
-              <input
-                id="personalItemAllowed"
-                type="checkbox"
-                checked={form.personalItemAllowed}
-                onChange={(e) =>
-                  updateField("personalItemAllowed", e.target.checked)
-                }
-                className="size-4 rounded border-gray-300"
+            <div className="w-28 space-y-1.5">
+              <label className="block text-sm font-medium">{t("luggageWeight")}</label>
+              <Input
+                type="number"
+                min={0}
+                placeholder="kg"
+                value={item.weightKg}
+                onChange={(e) => updateLuggage(index, "weightKg", e.target.value)}
               />
-              <label htmlFor="personalItemAllowed" className="block text-sm font-medium">
-                {t("personalItemAllowed")}
-              </label>
             </div>
+            <Button
+              type="button"
+              variant="outline"
+              size="sm"
+              onClick={() => removeLuggage(index)}
+              className="shrink-0"
+            >
+              <Trash2 className="size-4" />
+            </Button>
           </div>
-        </div>
+        ))}
+        <Button type="button" variant="outline" size="sm" onClick={addLuggage}>
+          <Plus className="me-1 size-4" />
+          {t("addLuggage")}
+        </Button>
       </fieldset>
 
       {/* ---- Stops Section ---- */}
@@ -371,99 +400,6 @@ export function FlightFormFields({
           <Plus className="me-1 size-4" />
           {t("addStop")}
         </Button>
-      </fieldset>
-
-      {/* ---- Package Section ---- */}
-      <fieldset className="space-y-4">
-        <legend className="text-sm font-semibold text-muted-foreground uppercase tracking-wider">
-          {t("formPackage")}
-        </legend>
-        <div className="flex items-center gap-2">
-          <input
-            id="isPackage"
-            type="checkbox"
-            checked={form.isPackage}
-            onChange={(e) => updateField("isPackage", e.target.checked)}
-            className="size-4 rounded border-gray-300"
-          />
-          <label htmlFor="isPackage" className="block text-sm font-medium">
-            {t("isPackage")}
-          </label>
-        </div>
-        {form.isPackage && (
-          <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
-            <div className="space-y-1.5">
-              <label htmlFor="hotelIncluded" className="block text-sm font-medium">
-                {t("hotelIncluded")}
-              </label>
-              <Input
-                id="hotelIncluded"
-                placeholder={t("hotelPlaceholder")}
-                value={form.hotelIncluded}
-                onChange={(e) => updateField("hotelIncluded", e.target.value)}
-              />
-            </div>
-            <div className="space-y-1.5">
-              <label htmlFor="transferIncluded" className="block text-sm font-medium">
-                {t("transferIncluded")}
-              </label>
-              <Input
-                id="transferIncluded"
-                placeholder={t("transferPlaceholder")}
-                value={form.transferIncluded}
-                onChange={(e) =>
-                  updateField("transferIncluded", e.target.value)
-                }
-              />
-            </div>
-            <div className="space-y-1.5">
-              <label htmlFor="insuranceIncluded" className="block text-sm font-medium">
-                {t("insuranceIncluded")}
-              </label>
-              <Input
-                id="insuranceIncluded"
-                placeholder={t("insurancePlaceholder")}
-                value={form.insuranceIncluded}
-                onChange={(e) =>
-                  updateField("insuranceIncluded", e.target.value)
-                }
-              />
-            </div>
-          </div>
-        )}
-      </fieldset>
-
-      {/* ---- Contact Section ---- */}
-      <fieldset className="space-y-4">
-        <legend className="text-sm font-semibold text-muted-foreground uppercase tracking-wider">
-          {t("formContact")}
-        </legend>
-        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-          <div className="space-y-1.5">
-            <label htmlFor="contactWhatsapp" className="block text-sm font-medium">
-              {t("contactWhatsapp")}
-            </label>
-            <Input
-              id="contactWhatsapp"
-              type="tel"
-              value={form.whatsappNumber}
-              onChange={(e) => updateField("whatsappNumber", e.target.value)}
-              dir="ltr"
-            />
-          </div>
-          <div className="space-y-1.5">
-            <label htmlFor="contactPhone" className="block text-sm font-medium">
-              {t("contactPhone")}
-            </label>
-            <Input
-              id="contactPhone"
-              type="tel"
-              value={form.phoneNumber}
-              onChange={(e) => updateField("phoneNumber", e.target.value)}
-              dir="ltr"
-            />
-          </div>
-        </div>
       </fieldset>
 
       {/* ---- Description ---- */}

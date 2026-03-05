@@ -21,7 +21,8 @@ export default defineSchema({
   })
     .index("by_clerk_id", ["clerkId"])
     .index("by_email", ["email"])
-    .index("by_role", ["role"]),
+    .index("by_role", ["role"])
+    .searchIndex("search_name", { searchField: "name" }),
 
   // ============================================================
   // MODULE 1 — Extraction Flights
@@ -48,9 +49,17 @@ export default defineSchema({
     whatsappNumber: v.optional(v.string()),
     phoneNumber: v.optional(v.string()),
     // Luggage
-    checkedBagKg: v.optional(v.number()), // max checked bag weight, e.g. 23
-    carryOnAllowed: v.optional(v.boolean()), // trolley / carry-on
-    personalItemAllowed: v.optional(v.boolean()), // handbag / personal item
+    checkedBagKg: v.optional(v.number()), // legacy — max checked bag weight
+    carryOnAllowed: v.optional(v.boolean()), // legacy
+    personalItemAllowed: v.optional(v.boolean()), // legacy
+    luggage: v.optional(
+      v.array(
+        v.object({
+          type: v.string(), // e.g. "Checked Bag", "Carry-on", "Personal Item"
+          weightKg: v.optional(v.number()),
+        })
+      )
+    ),
     // Stops / layovers
     stops: v.optional(
       v.array(
@@ -81,6 +90,14 @@ export default defineSchema({
     .index("by_status_price", ["status", "pricePerSeat"])
     .index("by_country_price", ["departureCountry", "pricePerSeat"])
     .index("by_approval", ["approvalStatus"]),
+
+  // Saved / followed flights — per-user bookmarks
+  savedFlights: defineTable({
+    userId: v.id("users"),
+    flightId: v.id("flights"),
+  })
+    .index("by_user", ["userId"])
+    .index("by_user_flight", ["userId", "flightId"]),
 
   // ============================================================
   // MODULE 2 — Map Services (populated by Google Places Action)
@@ -117,6 +134,7 @@ export default defineSchema({
     title: v.string(),
     url: v.string(),
     description: v.optional(v.string()),
+    imageUrl: v.optional(v.string()),
     language: v.union(v.literal("he"), v.literal("en")),
     publishedAt: v.number(),
     country: v.optional(v.string()),
@@ -168,6 +186,7 @@ export default defineSchema({
         v.literal("safety_check")
       )
     ),
+    repostOfId: v.optional(v.id("posts")),
     isPinned: v.optional(v.boolean()),
     isDeleted: v.optional(v.boolean()),
   })
@@ -199,7 +218,8 @@ export default defineSchema({
     type: v.union(
       v.literal("country"),
       v.literal("emergency"),
-      v.literal("dm")
+      v.literal("dm"),
+      v.literal("group")
     ),
     participantIds: v.optional(v.array(v.id("users"))),
   })

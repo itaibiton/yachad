@@ -4,7 +4,7 @@ import { useEffect, useRef, useMemo } from "react";
 import { useTranslations } from "next-intl";
 import {
   Map,
-  Marker,
+  AdvancedMarker,
   useMap,
   useMapsLibrary,
 } from "@vis.gl/react-google-maps";
@@ -12,7 +12,8 @@ import { MapPin } from "lucide-react";
 import type { Doc } from "../../../../convex/_generated/dataModel";
 import { getFlightCoords } from "@/shared/data/airports";
 import { getCountryByCode } from "@/shared/data/countries";
-import { greatCirclePoints, circleIcon } from "./flight-map-utils";
+import { greatCirclePoints } from "./flight-map-utils";
+import { MapMarkerDot } from "./MapMarkerDot";
 
 interface AgentFlightsMapProps {
   flights: Doc<"flights">[] | undefined;
@@ -91,9 +92,7 @@ function BoundsFitter({ points }: { points: { lat: number; lng: number }[] }) {
 
 export function AgentFlightsMap({ flights }: AgentFlightsMapProps) {
   const t = useTranslations("flights");
-
-  const originIcon = useMemo(() => circleIcon("#10b981"), []);
-  const destIcon = useMemo(() => circleIcon("#6366f1"), []);
+  const mapId = process.env.NEXT_PUBLIC_GOOGLE_MAPS_MAP_ID ?? "DEMO_MAP_ID";
 
   // Derive unique routes from the agent's flights
   const routeData = useMemo(() => {
@@ -200,6 +199,7 @@ export function AgentFlightsMap({ flights }: AgentFlightsMapProps) {
   return (
     <Map
       id="agent-flights-map"
+      mapId={mapId}
       defaultCenter={defaultCenter}
       defaultZoom={4}
       disableDefaultUI
@@ -213,22 +213,12 @@ export function AgentFlightsMap({ flights }: AgentFlightsMapProps) {
       ))}
 
       {markers.map((m) => (
-        <Marker
-          key={m.key}
-          position={m.coords}
-          label={{
-            text: `${m.flag} ${m.label}`,
-            color: "#fff",
-            fontWeight: "600",
-            fontSize: "11px",
-          }}
-          icon={{
-            url: m.isDep ? originIcon : destIcon,
-            scaledSize: { width: 14, height: 14, equals: () => false },
-            labelOrigin: { x: 7, y: -8, equals: () => false },
-          }}
-          title={m.label}
-        />
+        <AdvancedMarker key={m.key} position={m.coords} title={m.label}>
+          <MapMarkerDot
+            color={m.isDep ? "#10b981" : "#6366f1"}
+            label={`${m.flag} ${m.label}`}
+          />
+        </AdvancedMarker>
       ))}
     </Map>
   );

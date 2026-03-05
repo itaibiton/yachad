@@ -151,6 +151,14 @@ export const registerAsAgentWithFlights = mutation({
           checkedBagKg: v.optional(v.number()),
           carryOnAllowed: v.optional(v.boolean()),
           personalItemAllowed: v.optional(v.boolean()),
+          luggage: v.optional(
+            v.array(
+              v.object({
+                type: v.string(),
+                weightKg: v.optional(v.number()),
+              })
+            )
+          ),
           stops: v.optional(
             v.array(
               v.object({
@@ -219,6 +227,7 @@ export const registerAsAgentWithFlights = mutation({
         checkedBagKg: flight.checkedBagKg,
         carryOnAllowed: flight.carryOnAllowed,
         personalItemAllowed: flight.personalItemAllowed,
+        luggage: flight.luggage,
         stops: flight.stops,
         isPackage: flight.isPackage,
         hotelIncluded: flight.hotelIncluded,

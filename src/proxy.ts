@@ -9,12 +9,14 @@ const isPublicRoute = createRouteMatcher([
   "/:locale/sign-in(.*)",
   "/:locale/sign-up(.*)",
   "/:locale/sso-callback(.*)",
-  "/:locale", // exact home (public landing)
-  "/api(.*)", // API routes are public (auth handled per-route)
+  "/",         // bare root (before intl redirect)
+  "/:locale",  // exact home (public landing)
+  "/api(.*)",  // API routes are public (auth handled per-route)
 ]);
 
 // Role-protected routes
 const isAgentRoute = createRouteMatcher(["/:locale/agent(.*)"]);
+const isAgentOnboarding = createRouteMatcher(["/:locale/agent-onboarding(.*)"]);
 const isAdminRoute = createRouteMatcher(["/:locale/admin(.*)"]);
 
 const isApiRoute = createRouteMatcher(["/api(.*)"]);
@@ -48,7 +50,7 @@ export default clerkMiddleware(async (auth, req) => {
     role = (user.publicMetadata as Record<string, unknown>)?.role as string | undefined;
   }
 
-  if (isAgentRoute(req) && role !== "agent" && role !== "admin") {
+  if (isAgentRoute(req) && !isAgentOnboarding(req) && role !== "agent" && role !== "admin") {
     return Response.redirect(new URL("/", req.url));
   }
   if (isAdminRoute(req) && role !== "admin") {

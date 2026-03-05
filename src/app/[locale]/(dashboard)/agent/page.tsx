@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { useTranslations, useLocale } from "next-intl";
 import { useQuery, useMutation, useConvexAuth } from "convex/react";
+import { useUser } from "@clerk/nextjs";
 import { api } from "../../../../../convex/_generated/api";
 import type { Doc } from "../../../../../convex/_generated/dataModel";
 import { Button } from "@/components/ui/button";
@@ -82,13 +83,16 @@ export default function AgentPortalPage() {
   const t = useTranslations("agent");
   const locale = useLocale();
   const { isAuthenticated } = useConvexAuth();
+  const { user } = useUser();
+  const role = user?.publicMetadata?.role as string | undefined;
+  const isAgent = isAuthenticated && (role === "agent" || role === "admin");
   const flights = useQuery(
     api.modules.flights.queries.listAgentFlights,
-    isAuthenticated ? undefined : "skip"
+    isAgent ? undefined : "skip"
   );
   const stats = useQuery(
     api.modules.flights.queries.getAgentFlightStats,
-    isAuthenticated ? undefined : "skip"
+    isAgent ? undefined : "skip"
   );
   const updateFlightStatus = useMutation(
     api.modules.flights.mutations.updateFlightStatus

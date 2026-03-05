@@ -9,38 +9,45 @@ export type NewsArticleWithSource = Doc<"newsArticles"> & {
   sourceName: string;
   sourceFaviconUrl: string | null;
   sourceTrustTier: "official" | "verified" | "community";
+  imageUrl?: string | null;
 };
 
 /**
- * getTrustTierConfig — returns display configuration for a trust tier badge.
+ * Trust tier visual configuration.
  *
- * Used by NewsCard to render colored badge chips:
- * - Official: Israeli blue (bg-blue-600)
- * - Verified: green (bg-green-600)
- * - Community: muted gray (bg-muted)
+ * - `dotClassName`: small colored dot rendered next to the source favicon
+ * - `badgeClassName`: Tailwind classes for the Badge chip (used in hero cards)
+ * - `labelKey`: i18n key under "news" namespace
  */
 export function getTrustTierConfig(
   tier: "official" | "verified" | "community"
 ): {
-  labelKey: string; // i18n key under "news" namespace
-  className: string; // Tailwind classes for the badge
+  labelKey: string;
+  dotClassName: string;
+  badgeClassName: string;
 } {
   switch (tier) {
     case "official":
       return {
         labelKey: "trustOfficial",
-        className: "bg-blue-600 text-white border-blue-600",
+        dotClassName: "bg-blue-500",
+        badgeClassName:
+          "bg-blue-500/10 text-blue-700 dark:text-blue-400 border-blue-500/30",
       };
     case "verified":
       return {
         labelKey: "trustVerified",
-        className: "bg-green-600 text-white border-green-600",
+        dotClassName: "bg-emerald-500",
+        badgeClassName:
+          "bg-emerald-500/10 text-emerald-700 dark:text-emerald-400 border-emerald-500/30",
       };
     case "community":
     default:
       return {
         labelKey: "trustCommunity",
-        className: "bg-muted text-muted-foreground border-border",
+        dotClassName: "bg-muted-foreground/50",
+        badgeClassName:
+          "bg-muted text-muted-foreground border-border",
       };
   }
 }

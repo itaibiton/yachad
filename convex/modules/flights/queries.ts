@@ -2,7 +2,7 @@ import { query } from "../../_generated/server";
 import { v } from "convex/values";
 import { paginationOptsValidator } from "convex/server";
 import { filter } from "convex-helpers/server/filter";
-import { requireAgent } from "../../lib/auth";
+import { requireAgent, requireUser } from "../../lib/auth";
 
 /**
  * listFlights — Paginated browse query with multi-field filtering.
@@ -148,6 +148,7 @@ export const listFlights = query({
         const agent = await ctx.db.get(flight.agentId);
         return {
           ...flight,
+          whatsappNumber: agent?.whatsappNumber || flight.whatsappNumber,
           agentName: agent?.name ?? "Unknown Agent",
           agentIsVerified: agent?.isApproved === true,
           agentImageUrl: agent?.imageUrl ?? null,
@@ -199,6 +200,7 @@ export const listUrgentFlights = query({
         const agent = await ctx.db.get(flight.agentId);
         return {
           ...flight,
+          whatsappNumber: agent?.whatsappNumber || flight.whatsappNumber,
           agentName: agent?.name ?? "Unknown Agent",
           agentIsVerified: agent?.isApproved === true,
           agentImageUrl: agent?.imageUrl ?? null,
@@ -384,6 +386,7 @@ export const getFlightWithAgent = query({
 
     return {
       ...flight,
+      whatsappNumber: agent?.whatsappNumber || flight.whatsappNumber,
       agentName: agent?.name ?? "Unknown Agent",
       agentIsVerified: agent?.isApproved === true,
       agentImageUrl: agent?.imageUrl ?? null,
@@ -465,5 +468,33 @@ export const getAgentFlightStats = query({
       avgPrice,
       primaryCurrency,
     };
+  },
+});
+
+/**
+ * listSavedFlightIds — returns the set of flight IDs saved by the current user.
+ *
+ * Returns an array of flight ID strings for efficient client-side lookups.
+ * Returns null if the user is not authenticated (allows unauthenticated browsing).
+ */
+export const listSavedFlightIds = query({
+  args: {},
+  handler: async (ctx) => {
+    const identity = await ctx.auth.getUserIdentity();
+    if (!identity) return null;
+
+    const user = await ctx.db
+      .query("users")
+      .withIndex("by_clerk_id", (q) => q.eq("clerkId", identity.subject))
+      .unique();
+
+    if (!user) return null;
+
+    const saved = await ctx.db
+      .query("savedFlights")
+      .withIndex("by_user", (q) => q.eq("userId", user._id))
+      .collect();
+
+    return saved.map((s) => s.flightId);
   },
 });

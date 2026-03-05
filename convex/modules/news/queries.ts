@@ -21,8 +21,6 @@ import { filter } from "convex-helpers/server/filter";
 export const listNewsArticles = query({
   args: {
     paginationOpts: paginationOptsValidator,
-    language: v.optional(v.union(v.literal("he"), v.literal("en"))),
-    country: v.optional(v.string()),
   },
   handler: async (ctx, args) => {
     const baseQuery = ctx.db
@@ -33,14 +31,6 @@ export const listNewsArticles = query({
     const filtered = filter(baseQuery, (article) => {
       if (article.isDeleted === true) return false;
       if (article.isFeatured === true) return false;
-      if (args.language !== undefined && article.language !== args.language)
-        return false;
-      if (
-        args.country !== undefined &&
-        article.country !== undefined &&
-        article.country !== args.country
-      )
-        return false;
       return true;
     });
 
@@ -71,10 +61,8 @@ export const listNewsArticles = query({
  * Denormalizes source data same as listNewsArticles.
  */
 export const listFeaturedArticles = query({
-  args: {
-    country: v.optional(v.string()),
-  },
-  handler: async (ctx, args) => {
+  args: {},
+  handler: async (ctx) => {
     const baseQuery = ctx.db
       .query("newsArticles")
       .withIndex("by_published")
@@ -83,12 +71,6 @@ export const listFeaturedArticles = query({
     const filtered = filter(baseQuery, (article) => {
       if (article.isFeatured !== true) return false;
       if (article.isDeleted === true) return false;
-      if (
-        args.country !== undefined &&
-        article.country !== undefined &&
-        article.country !== args.country
-      )
-        return false;
       return true;
     });
 

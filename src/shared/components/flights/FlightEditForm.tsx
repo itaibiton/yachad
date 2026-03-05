@@ -11,6 +11,7 @@ import {
   FlightFormFields,
   type FlightFormState,
   type FlightStop,
+  type LuggageItem,
 } from "./FlightFormFields";
 
 interface FlightEditFormProps {
@@ -47,6 +48,12 @@ function flightToFormState(flight: Doc<"flights">): FlightFormState {
     checkedBagKg: flight.checkedBagKg != null ? String(flight.checkedBagKg) : "",
     carryOnAllowed: flight.carryOnAllowed ?? false,
     personalItemAllowed: flight.personalItemAllowed ?? false,
+    luggage: flight.luggage
+      ? flight.luggage.map((l) => ({
+          type: l.type,
+          weightKg: l.weightKg != null ? String(l.weightKg) : "",
+        }))
+      : [],
     isPackage: flight.isPackage ?? false,
     hotelIncluded: flight.hotelIncluded ?? "",
     transferIncluded: flight.transferIncluded ?? "",
@@ -80,6 +87,7 @@ export function FlightEditForm({
   const [stops, setStops] = useState<FlightStop[]>(() =>
     flightToStops(flight)
   );
+  const [luggage, setLuggage] = useState<LuggageItem[]>(() => form.luggage);
 
   const updateField = (field: string, value: string | boolean) => {
     setForm((prev) => ({ ...prev, [field]: value }));
@@ -142,6 +150,15 @@ export function FlightEditForm({
           : undefined,
         carryOnAllowed: form.carryOnAllowed || undefined,
         personalItemAllowed: form.personalItemAllowed || undefined,
+        luggage:
+          luggage.length > 0
+            ? luggage
+                .filter((l) => l.type)
+                .map((l) => ({
+                  type: l.type,
+                  weightKg: l.weightKg ? Number(l.weightKg) : undefined,
+                }))
+            : undefined,
         stops:
           stops.length > 0
             ? stops.map((s) => ({
@@ -177,6 +194,12 @@ export function FlightEditForm({
         addStop={addStop}
         removeStop={removeStop}
         updateStop={updateStop}
+        luggage={luggage}
+        addLuggage={() => setLuggage((prev) => [...prev, { type: "", weightKg: "" }])}
+        removeLuggage={(i) => setLuggage((prev) => prev.filter((_, idx) => idx !== i))}
+        updateLuggage={(i, field, value) =>
+          setLuggage((prev) => prev.map((l, idx) => (idx === i ? { ...l, [field]: value } : l)))
+        }
       />
       <div className="flex gap-3">
         <Button

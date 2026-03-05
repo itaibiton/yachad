@@ -5,7 +5,7 @@ import { useQuery } from "convex/react";
 import { useTranslations } from "next-intl";
 import {
   Map,
-  Marker,
+  AdvancedMarker,
   useMap,
   useMapsLibrary,
 } from "@vis.gl/react-google-maps";
@@ -14,7 +14,8 @@ import { api } from "../../../../convex/_generated/api";
 import { getFlightCoords } from "@/shared/data/airports";
 import { getCountryByCode } from "@/shared/data/countries";
 import { useAppStore } from "@/stores/appStore";
-import { greatCirclePoints, circleIcon } from "./flight-map-utils";
+import { greatCirclePoints } from "./flight-map-utils";
+import { MapMarkerDot } from "./MapMarkerDot";
 
 interface FlightsMapSidebarProps {
   filters: {
@@ -106,6 +107,7 @@ function BoundsFitter({ points }: { points: { lat: number; lng: number }[] }) {
 export function FlightsMapSidebar({ filters, allDepartures }: FlightsMapSidebarProps) {
   const t = useTranslations("flights");
   const selectedCountry = useAppStore((s) => s.selectedCountry);
+  const mapId = process.env.NEXT_PUBLIC_GOOGLE_MAPS_MAP_ID ?? "DEMO_MAP_ID";
 
   const departureCountry = allDepartures
     ? undefined
@@ -140,10 +142,6 @@ export function FlightsMapSidebar({ filters, allDepartures }: FlightsMapSidebarP
         }
       : "skip"
   );
-
-  // Memoize marker icon URLs
-  const originIcon = useMemo(() => circleIcon("#10b981"), []);
-  const destIcon = useMemo(() => circleIcon("#6366f1"), []);
 
   // === Single-origin mode ===
   const originCoords = useMemo(
@@ -282,6 +280,7 @@ export function FlightsMapSidebar({ filters, allDepartures }: FlightsMapSidebarP
   return (
     <Map
       id="sidebar-map"
+      mapId={mapId}
       defaultCenter={defaultCenter}
       defaultZoom={4}
       disableDefaultUI
@@ -297,39 +296,14 @@ export function FlightsMapSidebar({ filters, allDepartures }: FlightsMapSidebarP
             <RoutePolyline key={d.key} from={originCoords!} to={d.coords} />
           ))}
 
-          <Marker
-            position={originCoords!}
-            label={{
-              text: `${originCountry?.flag ?? ""} ${t("mapYourLocation")}`,
-              color: "#fff",
-              fontWeight: "600",
-              fontSize: "11px",
-            }}
-            icon={{
-              url: originIcon,
-              scaledSize: { width: 16, height: 16, equals: () => false },
-              labelOrigin: { x: 8, y: -8, equals: () => false },
-            }}
-            title={t("mapYourLocation")}
-          />
+          <AdvancedMarker position={originCoords!} title={t("mapYourLocation")}>
+            <MapMarkerDot color="#10b981" label={`${originCountry?.flag ?? ""} ${t("mapYourLocation")}`} />
+          </AdvancedMarker>
 
           {destData.map((d) => (
-            <Marker
-              key={d.key}
-              position={d.coords}
-              label={{
-                text: `${d.flag} ${d.label}`,
-                color: "#fff",
-                fontWeight: "600",
-                fontSize: "11px",
-              }}
-              icon={{
-                url: destIcon,
-                scaledSize: { width: 14, height: 14, equals: () => false },
-                labelOrigin: { x: 7, y: -8, equals: () => false },
-              }}
-              title={d.label}
-            />
+            <AdvancedMarker key={d.key} position={d.coords} title={d.label}>
+              <MapMarkerDot color="#6366f1" label={`${d.flag} ${d.label}`} />
+            </AdvancedMarker>
           ))}
         </>
       )}
@@ -342,22 +316,12 @@ export function FlightsMapSidebar({ filters, allDepartures }: FlightsMapSidebarP
           ))}
 
           {allRouteMarkers.map((m) => (
-            <Marker
-              key={m.key}
-              position={m.coords}
-              label={{
-                text: `${m.flag} ${m.label}`,
-                color: "#fff",
-                fontWeight: "600",
-                fontSize: "11px",
-              }}
-              icon={{
-                url: m.isDep ? originIcon : destIcon,
-                scaledSize: { width: 14, height: 14, equals: () => false },
-                labelOrigin: { x: 7, y: -8, equals: () => false },
-              }}
-              title={m.label}
-            />
+            <AdvancedMarker key={m.key} position={m.coords} title={m.label}>
+              <MapMarkerDot
+                color={m.isDep ? "#10b981" : "#6366f1"}
+                label={`${m.flag} ${m.label}`}
+              />
+            </AdvancedMarker>
           ))}
         </>
       )}

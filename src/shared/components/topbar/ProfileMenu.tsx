@@ -75,7 +75,7 @@ export function ProfileMenu() {
         </DropdownMenuItem>
         <DropdownMenuSeparator />
         <DropdownMenuItem
-          onClick={() => signOut()}
+          onClick={() => signOut({ redirectUrl: "/" })}
           className="flex items-center gap-2.5 rounded-lg px-3 py-2 text-sm text-destructive focus:text-destructive"
         >
           <LogOut className="size-4" />

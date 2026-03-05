@@ -1,19 +1,17 @@
 "use client";
 
-import { Home, Plane, Newspaper, MapPin, Users, MessageSquare, Upload } from "lucide-react";
+import { Home, Plane, Newspaper, MessageSquare, Upload } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { usePathname } from "next/navigation";
 import { useUser } from "@clerk/nextjs";
 import { Link } from "@/i18n/routing";
 import { cn } from "@/lib/utils";
 
-// Top 6 modules for mobile bottom navigation (most critical for stranded users)
+// Mobile bottom navigation — only active (non-coming-soon) pages
 const MOBILE_NAV_ITEMS = [
-  { href: "/overview", icon: Home, labelKey: "home" },
+  { href: "/feed", icon: Home, labelKey: "home" },
   { href: "/flights", icon: Plane, labelKey: "flights" },
   { href: "/news", icon: Newspaper, labelKey: "news" },
-  { href: "/map", icon: MapPin, labelKey: "map" },
-  { href: "/feed", icon: Users, labelKey: "feed" },
   { href: "/chat", icon: MessageSquare, labelKey: "chat" },
 ] as const;
 

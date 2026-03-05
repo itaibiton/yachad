@@ -1,11 +1,12 @@
 "use client"
 
-import { Home, Plane, Newspaper, MapPin, Users, MessageSquare, Hotel, Upload } from "lucide-react"
+import { Home, Plane, Newspaper, MapPin, MessageSquare, Hotel, Upload } from "lucide-react"
 import { usePathname } from "next/navigation"
 import { useTranslations, useLocale } from "next-intl"
 import { useUser } from "@clerk/nextjs"
 import { Link } from "@/i18n/routing"
 import { NavUser } from "@/components/nav-user"
+import { Badge } from "@/components/ui/badge"
 import {
   Sidebar,
   SidebarContent,
@@ -18,13 +19,14 @@ import {
   SidebarRail,
 } from "@/components/ui/sidebar"
 
+const COMING_SOON = new Set(["/map", "/reservations"])
+
 const NAV_ITEMS = [
-  { href: "/overview", icon: Home, labelKey: "home" },
+  { href: "/feed", icon: Home, labelKey: "home" },
   { href: "/flights", icon: Plane, labelKey: "flights" },
   { href: "/news", icon: Newspaper, labelKey: "news" },
-  { href: "/map", icon: MapPin, labelKey: "map" },
-  { href: "/feed", icon: Users, labelKey: "feed" },
   { href: "/chat", icon: MessageSquare, labelKey: "chat" },
+  { href: "/map", icon: MapPin, labelKey: "map" },
   { href: "/reservations", icon: Hotel, labelKey: "reservations" },
 ] as const
 
@@ -67,6 +69,21 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
           <SidebarMenu>
             {navItems.map((item) => {
               const isActive = pathname.includes(item.href.replace(/^\//, ""))
+              const isDisabled = COMING_SOON.has(item.href)
+
+              if (isDisabled) {
+                return (
+                  <SidebarMenuItem key={item.href}>
+                    <SidebarMenuButton disabled tooltip={t(item.labelKey)} className="text-xl py-6 [&>svg]:size-6 opacity-50 cursor-not-allowed">
+                      <item.icon />
+                      <span>{t(item.labelKey)}</span>
+                      <Badge variant="secondary" className="ms-auto text-[10px] px-1.5 py-0 font-normal group-data-[collapsible=icon]:hidden">
+                        {locale === "he" ? "בקרוב" : "Soon"}
+                      </Badge>
+                    </SidebarMenuButton>
+                  </SidebarMenuItem>
+                )
+              }
 
               return (
                 <SidebarMenuItem key={item.href}>

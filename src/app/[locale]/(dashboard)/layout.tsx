@@ -1,6 +1,7 @@
 import { auth } from "@clerk/nextjs/server";
 import { redirect } from "next/navigation";
 import { DashboardShell } from "@/shared/components/DashboardShell";
+import { AgentOnboardingGuard } from "@/shared/components/AgentOnboardingGuard";
 
 export default async function DashboardLayout({
   children,
@@ -16,5 +17,10 @@ export default async function DashboardLayout({
     redirect(`/${locale}/sign-in`);
   }
 
-  return <DashboardShell>{children}</DashboardShell>;
+  return (
+    <DashboardShell>
+      <AgentOnboardingGuard />
+      {children}
+    </DashboardShell>
+  );
 }

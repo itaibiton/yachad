@@ -3,13 +3,14 @@
 import { useEffect, useRef, useMemo, useState } from "react";
 import {
   Map,
-  Marker,
+  AdvancedMarker,
   useMap,
   useMapsLibrary,
 } from "@vis.gl/react-google-maps";
 import { getFlightCoords } from "@/shared/data/airports";
 import { getCountryByCode } from "@/shared/data/countries";
-import { greatCirclePoints, circleIcon } from "./flight-map-utils";
+import { greatCirclePoints } from "./flight-map-utils";
+import { MapMarkerDot } from "./MapMarkerDot";
 
 interface FlightRouteMapProps {
   departureAirport?: string;
@@ -81,6 +82,7 @@ export function FlightRouteMap({
   destinationCity,
 }: FlightRouteMapProps) {
   const apiKey = process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY;
+  const mapId = process.env.NEXT_PUBLIC_GOOGLE_MAPS_MAP_ID ?? "DEMO_MAP_ID";
   const [error, setError] = useState(false);
 
   const fromCoords = useMemo(
@@ -99,10 +101,6 @@ export function FlightRouteMap({
   const toLabel = destinationCity ?? destCountry?.name ?? destinationCountry;
   const fromFlag = depCountry?.flag ?? "";
   const toFlag = destCountry?.flag ?? "";
-
-  // Memoize marker icon URLs to avoid recreating SVG data-URLs each render
-  const originIcon = useMemo(() => circleIcon("#10b981"), []);
-  const destIcon = useMemo(() => circleIcon("#6366f1"), []);
 
   if (!apiKey || !fromCoords || !toCoords) return null;
 
@@ -127,6 +125,7 @@ export function FlightRouteMap({
   return (
     <Map
       id="route-map"
+      mapId={mapId}
       defaultCenter={center}
       defaultZoom={3}
       disableDefaultUI
@@ -138,26 +137,12 @@ export function FlightRouteMap({
       }}
     >
       <RoutePolyline from={fromCoords} to={toCoords} />
-      <Marker
-        position={fromCoords}
-        label={{ text: `${fromFlag} ${fromLabel}`, color: "#fff", fontWeight: "600", fontSize: "11px" }}
-        icon={{
-          url: originIcon,
-          scaledSize: { width: 14, height: 14, equals: () => false },
-          labelOrigin: { x: 7, y: -8, equals: () => false },
-        }}
-        title={fromLabel}
-      />
-      <Marker
-        position={toCoords}
-        label={{ text: `${toFlag} ${toLabel}`, color: "#fff", fontWeight: "600", fontSize: "11px" }}
-        icon={{
-          url: destIcon,
-          scaledSize: { width: 14, height: 14, equals: () => false },
-          labelOrigin: { x: 7, y: -8, equals: () => false },
-        }}
-        title={toLabel}
-      />
+      <AdvancedMarker position={fromCoords} title={fromLabel}>
+        <MapMarkerDot color="#10b981" label={`${fromFlag} ${fromLabel}`} />
+      </AdvancedMarker>
+      <AdvancedMarker position={toCoords} title={toLabel}>
+        <MapMarkerDot color="#6366f1" label={`${toFlag} ${toLabel}`} />
+      </AdvancedMarker>
     </Map>
   );
 }

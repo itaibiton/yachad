@@ -1,69 +1,34 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { useTranslations, useLocale } from "next-intl";
-import { formatDistanceToNow } from "date-fns";
-import { he as heLocale } from "date-fns/locale";
-import { useNewsFilters } from "@/shared/hooks/useNewsFilters";
-import { NewsFilterBar } from "./NewsFilterBar";
+import { useTranslations } from "next-intl";
+import { Rss } from "lucide-react";
 import { FeaturedNewsSection } from "./FeaturedNewsSection";
 import { NewsGrid } from "./NewsGrid";
 
 export function NewsClientPage() {
   const t = useTranslations("news");
-  const locale = useLocale();
-  const {
-    filters,
-    urlParams,
-    setUrlParams,
-    clearAll,
-    activeFilterCount,
-    effectiveCountry,
-  } = useNewsFilters();
-
-  // Track mount timestamp for "last updated" indicator
-  const [lastUpdatedAt, setLastUpdatedAt] = useState<Date>(() => new Date());
-
-  // Update the timestamp every 60 seconds
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setLastUpdatedAt(new Date());
-    }, 60_000);
-    return () => clearInterval(interval);
-  }, []);
-
-  const formattedTime = formatDistanceToNow(lastUpdatedAt, {
-    addSuffix: true,
-    locale: locale === "he" ? heLocale : undefined,
-  });
 
   return (
-    <div className="flex flex-col gap-6">
-      {/* Page header */}
-      <div className="flex flex-col gap-1">
-        <h1 className="text-2xl font-bold tracking-tight">{t("title")}</h1>
-        <p className="text-sm text-muted-foreground">{t("subtitle")}</p>
-        <p className="text-xs text-muted-foreground">
-          {t("lastUpdated", { time: formattedTime })}
-        </p>
+    <div className="-m-4 md:-m-6 flex flex-col">
+      {/* ── Page header ── */}
+      <div className="flex items-center gap-3 px-4 pt-4 pb-2 md:px-6 md:pt-6 md:pb-3">
+        <div className="flex size-9 items-center justify-center rounded-lg bg-brand/10 dark:bg-brand/20 shrink-0">
+          <Rss className="size-4 text-brand" aria-hidden />
+        </div>
+        <div className="flex flex-col gap-0.5 min-w-0">
+          <h1 className="text-xl font-bold tracking-tight text-foreground">
+            {t("title")}
+          </h1>
+          <p className="text-xs text-muted-foreground truncate">
+            {t("subtitle")}
+          </p>
+        </div>
       </div>
 
-      {/* Filter bar */}
-      <NewsFilterBar
-        urlParams={urlParams}
-        setUrlParams={setUrlParams}
-        activeFilterCount={activeFilterCount}
-        effectiveCountry={effectiveCountry}
-        clearAll={clearAll}
-      />
-
-      {/* Feed content */}
-      <div className="flex flex-col gap-6">
-        {/* Featured/Important articles pinned above main feed */}
-        <FeaturedNewsSection country={filters.country} />
-
-        {/* Infinite scroll news feed */}
-        <NewsGrid filters={filters} />
+      {/* ── Feed content ── */}
+      <div className="flex flex-col gap-6 px-4 pb-4 md:px-6 md:pb-6">
+        <FeaturedNewsSection />
+        <NewsGrid />
       </div>
     </div>
   );

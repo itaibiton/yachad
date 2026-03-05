@@ -11,6 +11,7 @@ import {
   createEmptyFlightForm,
   type FlightFormState,
   type FlightStop,
+  type LuggageItem,
 } from "./FlightFormFields";
 
 interface FlightUploadFormProps {
@@ -32,6 +33,7 @@ export function FlightUploadForm({
     createEmptyFlightForm(agentWhatsapp, agentPhone)
   );
   const [stops, setStops] = useState<FlightStop[]>([]);
+  const [luggage, setLuggage] = useState<LuggageItem[]>([]);
 
   const updateField = (field: string, value: string | boolean) => {
     setForm((prev) => ({ ...prev, [field]: value }));
@@ -84,6 +86,15 @@ export function FlightUploadForm({
         checkedBagKg: form.checkedBagKg ? Number(form.checkedBagKg) : undefined,
         carryOnAllowed: form.carryOnAllowed || undefined,
         personalItemAllowed: form.personalItemAllowed || undefined,
+        luggage:
+          luggage.length > 0
+            ? luggage
+                .filter((l) => l.type)
+                .map((l) => ({
+                  type: l.type,
+                  weightKg: l.weightKg ? Number(l.weightKg) : undefined,
+                }))
+            : undefined,
         stops:
           stops.length > 0
             ? stops.map((s) => ({
@@ -119,6 +130,12 @@ export function FlightUploadForm({
         addStop={addStop}
         removeStop={removeStop}
         updateStop={updateStop}
+        luggage={luggage}
+        addLuggage={() => setLuggage((prev) => [...prev, { type: "", weightKg: "" }])}
+        removeLuggage={(i) => setLuggage((prev) => prev.filter((_, idx) => idx !== i))}
+        updateLuggage={(i, field, value) =>
+          setLuggage((prev) => prev.map((l, idx) => (idx === i ? { ...l, [field]: value } : l)))
+        }
       />
       <Button
         type="submit"

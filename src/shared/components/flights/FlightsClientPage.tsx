@@ -2,9 +2,7 @@
 
 import { useState } from "react";
 import { useTranslations, useLocale } from "next-intl";
-import { useUser } from "@clerk/nextjs";
-import { ArrowUpDown, Clock, Plus } from "lucide-react";
-import { Link } from "@/i18n/routing";
+import { ArrowUpDown, Clock } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { FlightFilterBar } from "./FlightFilterBar";
 
@@ -27,8 +25,6 @@ const SORT_LABEL_KEYS: Record<FlightSort, string> = {
 
 export function FlightsClientPage() {
   const t = useTranslations("flights");
-  const { user } = useUser();
-  const isAgent = user?.publicMetadata?.role === "agent";
   const {
     filters,
     sort,
@@ -55,14 +51,6 @@ export function FlightsClientPage() {
             </div>
 
             <div className="flex items-center gap-3">
-              {/* Add Flight */}
-              <Button asChild size="sm">
-                <Link href={isAgent ? "/agent" : "/agent-onboarding"}>
-                  <Plus className="me-1.5 size-4" />
-                  {t("addFlight")}
-                </Link>
-              </Button>
-
               {/* Sort dropdown */}
               <div className="flex items-center gap-1.5">
                 <ArrowUpDown className="size-4 text-muted-foreground" />

@@ -20,6 +20,7 @@ export const upsertArticles = internalMutation({
         title: v.string(),
         url: v.string(),
         description: v.optional(v.string()),
+        imageUrl: v.optional(v.string()),
         language: v.union(v.literal("he"), v.literal("en")),
         publishedAt: v.number(),
         country: v.optional(v.string()),
@@ -41,6 +42,7 @@ export const upsertArticles = internalMutation({
         title: article.title,
         url: article.url,
         description: article.description,
+        imageUrl: article.imageUrl,
         language: article.language,
         publishedAt: article.publishedAt,
         country: article.country,
@@ -52,18 +54,20 @@ export const upsertArticles = internalMutation({
 });
 
 /**
- * seedNewsSources — Idempotent mutation to insert the 8 initial news sources.
+ * seedNewsSources — Idempotent mutation to populate news sources.
  *
- * Checks if any sources exist before inserting — safe to run multiple times.
- * Can be triggered via: npx convex run modules/news/mutations:seedNewsSources
- * or via the Convex dashboard.
+ * Deletes all existing sources and re-inserts the full list.
+ * Safe to run multiple times — always converges to the latest source list.
+ * Trigger via: npx convex run modules/news/mutations:seedNewsSources
  */
 export const seedNewsSources = internalMutation({
   args: {},
   handler: async (ctx) => {
-    // Idempotent: return early if sources already seeded
-    const existing = await ctx.db.query("newsSources").first();
-    if (existing !== null) return;
+    // Clear existing sources so we can re-seed with updated list
+    const existing = await ctx.db.query("newsSources").collect();
+    for (const source of existing) {
+      await ctx.db.delete(source._id);
+    }
 
     const sources: {
       url: string;
@@ -73,12 +77,11 @@ export const seedNewsSources = internalMutation({
       trustTier: "official" | "verified" | "community";
       isActive: boolean;
     }[] = [
-      // Hebrew — Official
+      // ── Hebrew — Official ──
       {
         url: "https://www.ynet.co.il/Integration/StoryRss2.xml",
         name: "Ynet",
-        faviconUrl:
-          "https://www.google.com/s2/favicons?domain=ynet.co.il&sz=32",
+        faviconUrl: "https://www.google.com/s2/favicons?domain=ynet.co.il&sz=32",
         language: "he",
         trustTier: "official",
         isActive: true,
@@ -86,8 +89,7 @@ export const seedNewsSources = internalMutation({
       {
         url: "https://rss.walla.co.il/feed/1",
         name: "Walla News",
-        faviconUrl:
-          "https://www.google.com/s2/favicons?domain=walla.co.il&sz=32",
+        faviconUrl: "https://www.google.com/s2/favicons?domain=walla.co.il&sz=32",
         language: "he",
         trustTier: "official",
         isActive: true,
@@ -95,37 +97,33 @@ export const seedNewsSources = internalMutation({
       {
         url: "https://rss.kan.org.il/Rss/RssKanNews.aspx",
         name: "Kan News",
-        faviconUrl:
-          "https://www.google.com/s2/favicons?domain=kan.org.il&sz=32",
+        faviconUrl: "https://www.google.com/s2/favicons?domain=kan.org.il&sz=32",
         language: "he",
         trustTier: "official",
-        isActive: true,
+        isActive: false, // SSL cert mismatch — disabled until Kan fixes their cert
       },
-      // Hebrew — Verified
+      // ── Hebrew — Verified ──
       {
-        url: "https://www.israelhayom.co.il/rss-feed",
-        name: "Israel Hayom",
-        faviconUrl:
-          "https://www.google.com/s2/favicons?domain=israelhayom.co.il&sz=32",
+        url: "https://www.inn.co.il/Rss.aspx",
+        name: "Arutz 7",
+        faviconUrl: "https://www.google.com/s2/favicons?domain=inn.co.il&sz=32",
         language: "he",
         trustTier: "verified",
         isActive: true,
       },
       {
-        url: "https://rss.mako.co.il/rss/31750a2610f26110VgnVCM2000002a0c10acRCRD.xml",
-        name: "Mako",
-        faviconUrl:
-          "https://www.google.com/s2/favicons?domain=mako.co.il&sz=32",
+        url: "https://www.maariv.co.il/Rss/RssFeedsMivzak",
+        name: "Maariv",
+        faviconUrl: "https://www.google.com/s2/favicons?domain=maariv.co.il&sz=32",
         language: "he",
         trustTier: "verified",
         isActive: true,
       },
-      // English — Official
+      // ── English — Official ──
       {
-        url: "https://www.timesofisrael.com/feed/",
+        url: "https://news.google.com/rss/search?q=site:timesofisrael.com&hl=en&gl=US&ceid=US:en",
         name: "Times of Israel",
-        faviconUrl:
-          "https://www.google.com/s2/favicons?domain=timesofisrael.com&sz=32",
+        faviconUrl: "https://www.google.com/s2/favicons?domain=timesofisrael.com&sz=32",
         language: "en",
         trustTier: "official",
         isActive: true,
@@ -133,26 +131,78 @@ export const seedNewsSources = internalMutation({
       {
         url: "https://www.jpost.com/rss/rssfeedsfrontpage.aspx",
         name: "Jerusalem Post",
-        faviconUrl:
-          "https://www.google.com/s2/favicons?domain=jpost.com&sz=32",
+        faviconUrl: "https://www.google.com/s2/favicons?domain=jpost.com&sz=32",
         language: "en",
         trustTier: "official",
         isActive: true,
       },
-      // English — Verified
+      // ── English — Verified ──
       {
-        url: "https://www.i24news.tv/en/rss",
-        name: "i24NEWS",
-        faviconUrl:
-          "https://www.google.com/s2/favicons?domain=i24news.tv&sz=32",
+        url: "https://www.ynetnews.com/Integration/StoryRss2.xml",
+        name: "Ynetnews",
+        faviconUrl: "https://www.google.com/s2/favicons?domain=ynetnews.com&sz=32",
         language: "en",
         trustTier: "verified",
+        isActive: true,
+      },
+      // ── English — Community (flights, airlines, travel) ──
+      {
+        url: "https://news.google.com/rss/search?q=Israel+flights+El+Al+Arkia+Israir&hl=en&gl=US&ceid=US:en",
+        name: "Israel Flights (Google)",
+        faviconUrl: "https://www.google.com/s2/favicons?domain=news.google.com&sz=32",
+        language: "en",
+        trustTier: "community",
+        isActive: true,
+      },
+      {
+        url: "https://news.google.com/rss/search?q=Israel+Iran+war+Middle+East&hl=en&gl=US&ceid=US:en",
+        name: "Israel & Iran (Google)",
+        faviconUrl: "https://www.google.com/s2/favicons?domain=news.google.com&sz=32",
+        language: "en",
+        trustTier: "community",
+        isActive: true,
+      },
+      {
+        url: "https://news.google.com/rss/search?q=Israel+USA+relations&hl=en&gl=US&ceid=US:en",
+        name: "Israel-USA (Google)",
+        faviconUrl: "https://www.google.com/s2/favicons?domain=news.google.com&sz=32",
+        language: "en",
+        trustTier: "community",
+        isActive: true,
+      },
+      {
+        url: "https://news.google.com/rss/search?q=%D7%A4%D7%99%D7%A7%D7%95%D7%93+%D7%94%D7%A2%D7%95%D7%A8%D7%A3+%D7%99%D7%A9%D7%A8%D7%90%D7%9C&hl=he&gl=IL&ceid=IL:he",
+        name: "Pikud HaOref (Google)",
+        faviconUrl: "https://www.google.com/s2/favicons?domain=news.google.com&sz=32",
+        language: "he",
+        trustTier: "community",
+        isActive: true,
+      },
+      {
+        url: "https://news.google.com/rss/search?q=%D7%98%D7%99%D7%A1%D7%95%D7%AA+%D7%9C%D7%99%D7%A9%D7%A8%D7%90%D7%9C+%D7%90%D7%9C+%D7%A2%D7%9C+%D7%90%D7%A8%D7%A7%D7%99%D7%A2+%D7%99%D7%A9%D7%A8%D7%90%D7%99%D7%A8&hl=he&gl=IL&ceid=IL:he",
+        name: "Flights to Israel (Google HE)",
+        faviconUrl: "https://www.google.com/s2/favicons?domain=news.google.com&sz=32",
+        language: "he",
+        trustTier: "community",
         isActive: true,
       },
     ];
 
     for (const source of sources) {
       await ctx.db.insert("newsSources", source);
+    }
+  },
+});
+
+/**
+ * clearAllArticles — Wipe all news articles. Used when re-seeding with new filters.
+ */
+export const clearAllArticles = internalMutation({
+  args: {},
+  handler: async (ctx) => {
+    const articles = await ctx.db.query("newsArticles").collect();
+    for (const article of articles) {
+      await ctx.db.delete(article._id);
     }
   },
 });

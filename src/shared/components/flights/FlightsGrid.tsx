@@ -1,8 +1,8 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useMemo } from "react";
 import { useTranslations } from "next-intl";
-import { usePaginatedQuery } from "convex/react";
+import { usePaginatedQuery, useQuery } from "convex/react";
 import { useInView } from "react-intersection-observer";
 import { Plane, Loader2 } from "lucide-react";
 import { api } from "../../../../convex/_generated/api";
@@ -25,6 +25,8 @@ interface FlightsGridProps {
 
 export function FlightsGrid({ filters, sort }: FlightsGridProps) {
   const t = useTranslations("flights");
+  const savedFlightIds = useQuery(api.modules.flights.queries.listSavedFlightIds);
+  const savedSet = useMemo(() => new Set(savedFlightIds ?? []), [savedFlightIds]);
 
   const { results, status, loadMore } = usePaginatedQuery(
     api.modules.flights.queries.listFlights,
@@ -83,7 +85,7 @@ export function FlightsGrid({ filters, sort }: FlightsGridProps) {
       {/* Flight cards grid */}
       <div className="grid grid-cols-1 gap-4 xl:grid-cols-2">
         {results.map((flight) => (
-          <FlightCard key={flight._id} flight={flight as unknown as FlightWithAgent} />
+          <FlightCard key={flight._id} flight={flight as unknown as FlightWithAgent} isSaved={savedSet.has(flight._id)} />
         ))}
       </div>
 

@@ -32,8 +32,11 @@ export type FlightWithAgent = Doc<"flights"> & {
  * The message is always in Hebrew because both users and agents are Israeli.
  * Phone number is stripped of non-digits before building the wa.me URL.
  */
-export function buildWhatsAppUrl(phone: string, flight: FlightWithAgent): string {
-  const cleanPhone = phone.replace(/\D/g, "");
+/** Default WhatsApp contact number */
+const DEFAULT_WHATSAPP = "972539858438";
+
+export function buildWhatsAppUrl(phone: string | undefined, flight: FlightWithAgent): string {
+  const cleanPhone = (phone ?? DEFAULT_WHATSAPP).replace(/\D/g, "") || DEFAULT_WHATSAPP;
 
   const departureCountry = getCountryByCode(flight.departureCountry);
   const destinationCountry = getCountryByCode(flight.destination);
@@ -47,7 +50,7 @@ export function buildWhatsAppUrl(phone: string, flight: FlightWithAgent): string
     year: "numeric",
   });
 
-  const message = `שלום, אני מעוניין/ת בטיסה מ${departure} ל${destination} בתאריך ${dateStr}. אנא ספרו לי עוד פרטים.`;
+  const message = `היי, אני רוצה לסגור את הטיסה מ${departure} ל${destination} בתאריך ${dateStr}.`;
 
   return `https://wa.me/${cleanPhone}?text=${encodeURIComponent(message)}`;
 }
