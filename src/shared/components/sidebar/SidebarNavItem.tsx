@@ -37,8 +37,8 @@ export function SidebarNavItem({
     <Link
       href={href}
       className={cn(
-        "flex rtl:flex-row-reverse items-center gap-3 rounded-lg font-sans text-sm font-medium transition-colors",
-        collapsed ? "size-10 justify-center p-0" : "w-full px-3 py-2",
+        "flex rtl:flex-row-reverse items-center gap-4 rounded-lg font-sans text-xl font-medium transition-colors",
+        collapsed ? "size-10 justify-center p-0" : "w-full px-3 py-3",
         isActive
           ? "bg-brand/10 text-brand hover:bg-brand/15 hover:text-brand"
           : "hover:bg-accent hover:text-accent-foreground"
@@ -46,7 +46,7 @@ export function SidebarNavItem({
       aria-current={isActive ? "page" : undefined}
     >
       <Icon
-        className={cn("size-5 shrink-0", isActive ? "text-brand" : "")}
+        className={cn("size-6 shrink-0", isActive ? "text-brand" : "")}
         aria-hidden="true"
       />
       {!collapsed && <span className="truncate">{label}</span>}

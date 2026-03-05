@@ -11,7 +11,7 @@ import { useDirection } from "@/shared/hooks/useDirection";
 
 // Module navigation links in crisis priority order per CONTEXT.md
 const NAV_ITEMS = [
-  { href: "/", icon: Home, labelKey: "home" },
+  { href: "/overview", icon: Home, labelKey: "home" },
   { href: "/flights", icon: Plane, labelKey: "flights" },
   { href: "/news", icon: Newspaper, labelKey: "news" },
   { href: "/map", icon: MapPin, labelKey: "map" },
@@ -29,7 +29,7 @@ export function AppSidebar() {
     <aside
       className={cn(
         "hidden md:flex flex-col bg-sidebar text-sidebar-foreground transition-all duration-300",
-        sidebarCollapsed ? "w-14" : "w-56"
+        sidebarCollapsed ? "w-14" : "w-64"
       )}
       aria-label="Main navigation"
     >

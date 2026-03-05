@@ -49,7 +49,7 @@ export function UrgentFlightsSection({ departureCountry }: UrgentFlightsSectionP
         </div>
       ) : (
         /* Grid layout for 1-3 urgent flights */
-        <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+        <div className="flex flex-col gap-4">
           {urgentFlights.map((flight) => (
             <FlightCard key={flight._id} flight={flight as unknown as FlightWithAgent} />
           ))}

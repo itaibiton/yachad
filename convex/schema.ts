@@ -13,6 +13,10 @@ export default defineSchema({
     role: v.union(v.literal("user"), v.literal("agent"), v.literal("admin")),
     isApproved: v.optional(v.boolean()),
     country: v.optional(v.string()),
+    phone: v.optional(v.string()),
+    whatsappNumber: v.optional(v.string()),
+    websiteUrl: v.optional(v.string()),
+    companyName: v.optional(v.string()),
     isBanned: v.optional(v.boolean()),
   })
     .index("by_clerk_id", ["clerkId"])
@@ -28,7 +32,10 @@ export default defineSchema({
     departureCity: v.optional(v.string()),
     destination: v.string(),
     destinationCity: v.optional(v.string()),
+    departureAirport: v.optional(v.string()), // e.g. "TLV", "ATH"
+    destinationAirport: v.optional(v.string()), // e.g. "JFK", "LHR"
     departureDate: v.number(), // Unix timestamp
+    arrivalDate: v.optional(v.number()), // Unix timestamp — landing time
     seats: v.number(),
     pricePerSeat: v.number(),
     currency: v.string(),
@@ -40,6 +47,20 @@ export default defineSchema({
     description: v.optional(v.string()),
     whatsappNumber: v.optional(v.string()),
     phoneNumber: v.optional(v.string()),
+    // Luggage
+    checkedBagKg: v.optional(v.number()), // max checked bag weight, e.g. 23
+    carryOnAllowed: v.optional(v.boolean()), // trolley / carry-on
+    personalItemAllowed: v.optional(v.boolean()), // handbag / personal item
+    // Stops / layovers
+    stops: v.optional(
+      v.array(
+        v.object({
+          country: v.string(), // ISO country code for flag
+          city: v.optional(v.string()),
+          durationMinutes: v.optional(v.number()),
+        })
+      )
+    ),
     isPackage: v.optional(v.boolean()),
     hotelIncluded: v.optional(v.string()),
     transferIncluded: v.optional(v.string()),
@@ -55,6 +76,10 @@ export default defineSchema({
     .index("by_agent", ["agentId"])
     .index("by_status_departure", ["status", "departureDate"])
     .index("by_country_departure", ["departureCountry", "departureDate"])
+    .index("by_status_creation", ["status"])
+    .index("by_country_creation", ["departureCountry"])
+    .index("by_status_price", ["status", "pricePerSeat"])
+    .index("by_country_price", ["departureCountry", "pricePerSeat"])
     .index("by_approval", ["approvalStatus"]),
 
   // ============================================================

@@ -45,7 +45,7 @@ export async function requireUser(ctx: QueryCtx | MutationCtx) {
  * Usage:
  *   const agent = await requireAgent(ctx);
  */
-export async function requireAgent(ctx: MutationCtx) {
+export async function requireAgent(ctx: QueryCtx | MutationCtx) {
   const user = await requireUser(ctx);
 
   if (user.role !== "agent" && user.role !== "admin") {

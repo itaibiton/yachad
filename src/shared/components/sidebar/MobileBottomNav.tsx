@@ -1,14 +1,15 @@
 "use client";
 
-import { Home, Plane, Newspaper, MapPin, Users, MessageSquare } from "lucide-react";
+import { Home, Plane, Newspaper, MapPin, Users, MessageSquare, Upload } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { usePathname } from "next/navigation";
+import { useUser } from "@clerk/nextjs";
 import { Link } from "@/i18n/routing";
 import { cn } from "@/lib/utils";
 
 // Top 6 modules for mobile bottom navigation (most critical for stranded users)
 const MOBILE_NAV_ITEMS = [
-  { href: "/", icon: Home, labelKey: "home" },
+  { href: "/overview", icon: Home, labelKey: "home" },
   { href: "/flights", icon: Plane, labelKey: "flights" },
   { href: "/news", icon: Newspaper, labelKey: "news" },
   { href: "/map", icon: MapPin, labelKey: "map" },
@@ -19,6 +20,13 @@ const MOBILE_NAV_ITEMS = [
 export function MobileBottomNav() {
   const t = useTranslations("nav");
   const pathname = usePathname();
+  const { user } = useUser();
+  const role = user?.publicMetadata?.role as string | undefined;
+  const isAgent = role === "agent" || role === "admin";
+
+  const navItems = isAgent
+    ? [...MOBILE_NAV_ITEMS, { href: "/agent" as const, icon: Upload, labelKey: "agent" as const }]
+    : MOBILE_NAV_ITEMS;
 
   return (
     // Visible ONLY on mobile (hidden on md+)
@@ -27,11 +35,8 @@ export function MobileBottomNav() {
       style={{ paddingBottom: "env(safe-area-inset-bottom)" }}
       aria-label="Mobile navigation"
     >
-      {MOBILE_NAV_ITEMS.map((item) => {
-        const isActive =
-          item.href === "/"
-            ? pathname.endsWith("/") || /^\/[a-z]{2}\/?$/.test(pathname)
-            : pathname.includes(item.href.replace(/^\//, ""));
+      {navItems.map((item) => {
+        const isActive = pathname.includes(item.href.replace(/^\//, ""));
 
         return (
           <Link

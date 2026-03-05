@@ -1,7 +1,7 @@
 "use client";
 
-import { User, Settings, LogOut } from "lucide-react";
-import { useTranslations } from "next-intl";
+import { LogOut } from "lucide-react";
+import { useTranslations, useLocale } from "next-intl";
 import { useUser, useClerk } from "@clerk/nextjs";
 import { Button } from "@/components/ui/button";
 import {
@@ -14,13 +14,17 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { useDirection } from "@/shared/hooks/useDirection";
+import { usePathname, useRouter } from "@/i18n/routing";
 
 export function ProfileMenu() {
   const t = useTranslations("topbar");
   const tAuth = useTranslations("auth");
+  const locale = useLocale();
   const { isRTL } = useDirection();
   const { user } = useUser();
   const { signOut } = useClerk();
+  const router = useRouter();
+  const pathname = usePathname();
 
   const nameInitials =
     (user?.firstName?.[0] ?? "") + (user?.lastName?.[0] ?? "");
@@ -29,6 +33,10 @@ export function ProfileMenu() {
 
   const displayName =
     user?.fullName ?? user?.username ?? user?.primaryEmailAddress?.emailAddress ?? "User";
+
+  const handleSwitchLanguage = () => {
+    router.replace(pathname, { locale: locale === "he" ? "en" : "he" });
+  };
 
   return (
     <DropdownMenu>
@@ -58,13 +66,12 @@ export function ProfileMenu() {
           </p>
         </DropdownMenuLabel>
         <DropdownMenuSeparator />
-        <DropdownMenuItem className="flex items-center gap-2.5 rounded-lg px-3 py-2 text-sm">
-          <User className="size-4 text-muted-foreground" />
-          <span>{t("profile")}</span>
-        </DropdownMenuItem>
-        <DropdownMenuItem className="flex items-center gap-2.5 rounded-lg px-3 py-2 text-sm">
-          <Settings className="size-4 text-muted-foreground" />
-          <span>Settings</span>
+        <DropdownMenuItem
+          onClick={handleSwitchLanguage}
+          className="flex items-center gap-2.5 rounded-lg px-3 py-2 text-sm"
+        >
+          <span className="text-base leading-none">{locale === "he" ? "🇺🇸" : "🇮🇱"}</span>
+          <span>{locale === "he" ? "English" : "עברית"}</span>
         </DropdownMenuItem>
         <DropdownMenuSeparator />
         <DropdownMenuItem

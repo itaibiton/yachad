@@ -8,14 +8,22 @@ import { Plane, Loader2 } from "lucide-react";
 import { api } from "../../../../convex/_generated/api";
 import { FlightCardSkeleton } from "@/shared/components/LoadingSkeleton";
 import { FlightCard } from "./FlightCard";
-import type { FlightFilters } from "./FlightFilterBar";
 import type { FlightWithAgent } from "./flight-utils";
+import type { FlightSort } from "@/shared/hooks/useFlightFilters";
 
 interface FlightsGridProps {
-  filters: FlightFilters;
+  filters: {
+    departureCountry?: string;
+    destination?: string;
+    dateFrom?: number;
+    dateTo?: number;
+    minSeats?: number;
+    isPackage?: boolean;
+  };
+  sort: FlightSort;
 }
 
-export function FlightsGrid({ filters }: FlightsGridProps) {
+export function FlightsGrid({ filters, sort }: FlightsGridProps) {
   const t = useTranslations("flights");
 
   const { results, status, loadMore } = usePaginatedQuery(
@@ -27,6 +35,7 @@ export function FlightsGrid({ filters }: FlightsGridProps) {
       dateTo: filters.dateTo,
       minSeats: filters.minSeats,
       isPackage: filters.isPackage,
+      sort,
     },
     { initialNumItems: 12 }
   );
@@ -46,7 +55,7 @@ export function FlightsGrid({ filters }: FlightsGridProps) {
   // Loading first page — show skeleton grid
   if (status === "LoadingFirstPage") {
     return (
-      <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+      <div className="grid grid-cols-1 gap-4 xl:grid-cols-2">
         {Array.from({ length: 6 }).map((_, i) => (
           <FlightCardSkeleton key={i} />
         ))}
@@ -72,7 +81,7 @@ export function FlightsGrid({ filters }: FlightsGridProps) {
   return (
     <div className="flex flex-col gap-4">
       {/* Flight cards grid */}
-      <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+      <div className="grid grid-cols-1 gap-4 xl:grid-cols-2">
         {results.map((flight) => (
           <FlightCard key={flight._id} flight={flight as unknown as FlightWithAgent} />
         ))}

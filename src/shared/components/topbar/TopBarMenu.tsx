@@ -3,9 +3,6 @@
 import {
   Menu,
   Languages,
-  Sun,
-  Moon,
-  Monitor,
   Bell,
   AlertTriangle,
   Phone,
@@ -14,7 +11,6 @@ import {
   ShieldAlert,
 } from "lucide-react";
 import { useTranslations, useLocale } from "next-intl";
-import { useTheme } from "next-themes";
 import { usePathname, useRouter } from "@/i18n/routing";
 import { Button } from "@/components/ui/button";
 import {
@@ -29,10 +25,6 @@ import { useDirection } from "@/shared/hooks/useDirection";
 import { useAppStore } from "@/stores/appStore";
 import { getCountryByCode } from "@/shared/data/countries";
 
-const THEME_ICONS = { system: Monitor, light: Sun, dark: Moon } as const;
-type Theme = keyof typeof THEME_ICONS;
-const THEME_CYCLE: Theme[] = ["system", "light", "dark"];
-
 export function TopBarMenu() {
   const t = useTranslations("topbar");
   const tEmergency = useTranslations("emergency");
@@ -40,14 +32,8 @@ export function TopBarMenu() {
   const locale = useLocale();
   const router = useRouter();
   const pathname = usePathname();
-  const { theme, setTheme } = useTheme();
   const { selectedCountry } = useAppStore();
   const country = selectedCountry ? getCountryByCode(selectedCountry) : null;
-
-  const currentTheme = (theme ?? "system") as Theme;
-  const nextTheme = THEME_CYCLE[(THEME_CYCLE.indexOf(currentTheme) + 1) % THEME_CYCLE.length];
-  const ThemeIcon = THEME_ICONS[currentTheme] ?? Monitor;
-  const themeLabel = { system: t("systemMode"), light: t("lightMode"), dark: t("darkMode") }[currentTheme];
 
   const handleSwitchLanguage = () => {
     router.replace(pathname, { locale: locale === "he" ? "en" : "he" });
@@ -133,14 +119,6 @@ export function TopBarMenu() {
           <Languages className="size-4 text-muted-foreground" />
           <span>{t("switchLanguage")}</span>
         </DropdownMenuItem>
-        <DropdownMenuItem
-          onClick={() => setTheme(nextTheme)}
-          className="flex rtl:flex-row-reverse items-center gap-2.5 rounded-lg px-3 py-2.5 text-sm"
-        >
-          <ThemeIcon className="size-4 text-muted-foreground" />
-          <span>{themeLabel}</span>
-        </DropdownMenuItem>
-
         <DropdownMenuSeparator />
 
         {/* Notifications */}

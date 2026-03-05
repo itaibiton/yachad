@@ -40,6 +40,25 @@ export const COUNTRIES: Country[] = [
   { code: "AE", name: "UAE", nameHe: "איחוד האמירויות", flag: "🇦🇪", embassyPhone: "+971-2-627-6444" },
 ];
 
+/**
+ * Convert any ISO 3166-1 alpha-2 code to its flag emoji.
+ * Works universally — each letter maps to a Unicode regional indicator symbol.
+ * "US" → 🇺🇸, "IL" → 🇮🇱, "CY" → 🇨🇾, etc.
+ */
+export function countryCodeToFlag(code: string): string {
+  return [...code.toUpperCase()].map(
+    (c) => String.fromCodePoint(0x1f1e6 - 65 + c.charCodeAt(0))
+  ).join("");
+}
+
 export function getCountryByCode(code: string): Country | undefined {
   return COUNTRIES.find((c) => c.code === code);
+}
+
+/**
+ * Get flag for any country code — uses hardcoded list first, falls back to
+ * algorithmic conversion so every ISO code works.
+ */
+export function getCountryFlag(code: string): string {
+  return getCountryByCode(code)?.flag ?? countryCodeToFlag(code);
 }

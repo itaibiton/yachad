@@ -1,5 +1,22 @@
+import { createContext, useContext } from "react";
 import { Doc } from "../../../../convex/_generated/dataModel";
 import { getCountryByCode } from "@/shared/data/countries";
+
+// ── Time-format context ──
+export type TimeFormat = "12" | "24";
+export const TimeFormatContext = createContext<TimeFormat>("24");
+export const useTimeFormat = () => useContext(TimeFormatContext);
+
+/**
+ * formatTime — formats a timestamp as HH:MM in 12h or 24h format.
+ */
+export function formatTime(ts: number, format: TimeFormat = "24"): string {
+  return new Date(ts).toLocaleTimeString(undefined, {
+    hour: "2-digit",
+    minute: "2-digit",
+    hour12: format === "12",
+  });
+}
 
 // FlightWithAgent — flight document with denormalized agent fields
 export type FlightWithAgent = Doc<"flights"> & {
