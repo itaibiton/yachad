@@ -69,7 +69,7 @@ Requirements for initial release. Each maps to roadmap phases.
 - [x] **NEWS-02**: User can see source attribution (outlet name + favicon) on each article
 - [ ] **NEWS-03**: User can see urgent alert banner pinned above the news feed (admin-created, dismissible)
 - [x] **NEWS-04**: System aggregates 10-20 RSS feeds with deduplication
-- [ ] **NEWS-05**: User can tap article to open original source in new tab
+- [x] **NEWS-05**: User can tap article to open original source in new tab
 - [x] **NEWS-06**: User can see Hebrew and English sources with language badge
 - [x] **NEWS-07**: News feed auto-refreshes every 5-10 minutes with "last updated" indicator
 - [x] **NEWS-08**: Admin can promote/pin stories marked as "Important" with badge
@@ -240,7 +240,7 @@ Which phases cover which requirements. Updated during roadmap creation.
 | NEWS-02 | Phase 4 | Complete |
 | NEWS-03 | Phase 4 | Pending |
 | NEWS-04 | Phase 4 | Complete |
-| NEWS-05 | Phase 4 | Pending |
+| NEWS-05 | Phase 4 | Complete |
 | NEWS-06 | Phase 4 | Complete |
 | NEWS-07 | Phase 4 | Complete |
 | NEWS-08 | Phase 4 | Complete |

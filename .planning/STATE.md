@@ -3,12 +3,12 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: unknown
-last_updated: "2026-03-05T10:51:44.244Z"
+last_updated: "2026-03-05T10:53:54.202Z"
 progress:
   total_phases: 3
   completed_phases: 2
   total_plans: 12
-  completed_plans: 10
+  completed_plans: 11
 ---
 
 # Project State
@@ -22,10 +22,10 @@ See: .planning/PROJECT.md (updated 2026-03-03)
 
 ## Current Position
 
-Phase: 3 of 9 complete
-Plan: Complete
-Status: Phase 3 (Flight Agent Portal) completed. Next: Phase 4 (News Aggregator).
-Last activity: 2026-03-05 — Phase 3 Flight Agent Portal completed (agent onboarding, flight CRUD, portal dashboard, landing page agent entry point).
+Phase: 4 (News Aggregator) — In Progress
+Plan: 2 of 3 complete (04-02 done)
+Status: Phase 4 news UI components complete. Next: 04-03 (news page wiring + alert banner).
+Last activity: 2026-03-05 — Phase 4 Plan 02 complete (NewsCard, NewsGrid, FeaturedNewsSection, NewsFilterBar, NewArticlesBanner, useNewsFilters).
 
 Progress: [██████████] 100%
 
@@ -54,6 +54,7 @@ Progress: [██████████] 100%
 | Phase 02 P02 | 3 | 2 tasks | 3 files |
 | Phase 02 P03 | 4 | 2 tasks | 5 files |
 | Phase 04-news-aggregator P01 | 12 | 2 tasks | 8 files |
+| Phase 04-news-aggregator P02 | 4 | 2 tasks | 7 files |
 
 ## Accumulated Context
 
@@ -106,6 +107,9 @@ Plan 01-04 decisions:
 - [Phase 04-01]: listActiveSources exported as internalQuery — only called by fetchRssFeeds action, not public-facing
 - [Phase 04-01]: actions.ts isolated with use node directive — Convex restriction: node-runtime files contain only actions; queries and mutations in separate V8 files
 - [Phase 04-01]: upsertArticles accepts sourceId as string from Node.js action, cast to Id<newsSources> at insert time — bridges node/V8 runtime type boundary
+- [Phase 04-02]: FeaturedNewsSection wraps NewsCard in ring-2 ring-amber-500/30 div to distinguish featured from regular cards without forking NewsCard
+- [Phase 04-02]: NewsGrid pull-to-refresh resets seenCount to null rather than calling Convex refetch — usePaginatedQuery is already reactive
+- [Phase 04-02]: NewsCard uses block anchor tag instead of onClick+window.open — allows native browser behaviors like middle-click
 
 ### Roadmap Evolution
 
@@ -122,6 +126,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-03-03
-Stopped at: Checkpoint — 01-05b-PLAN.md Task 3 (human visual verification of dashboard shell, RTL, dark mode, responsive layout). Tasks 1-2 committed (2a8996f, 587ee3b).
+Last session: 2026-03-05
+Stopped at: Completed 04-02-PLAN.md — all news UI components committed. Resume at 04-03 (news page).
 Resume file: None

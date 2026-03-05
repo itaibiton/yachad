@@ -189,7 +189,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6 → 7 → 8 →
 | 1. Foundation | 6/6 | Complete   | 2026-03-03 |
 | 2. Extraction Flights Marketplace | 3/3 | Complete   | 2026-03-03 |
 | 3. Flight Agent Portal | 3/3 | Complete   | 2026-03-05 |
-| 4. News Aggregator | 1/3 | In Progress|  |
+| 4. News Aggregator | 2/3 | In Progress|  |
 | 5. Jewish Services Map | 0/3 | Not started | - |
 | 6. Social Community Feed | 0/3 | Not started | - |
 | 7. Chat System | 0/3 | Not started | - |
