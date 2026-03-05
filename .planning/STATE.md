@@ -3,12 +3,12 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: unknown
-last_updated: "2026-03-05T10:53:54.202Z"
+last_updated: "2026-03-05T10:57:45Z"
 progress:
   total_phases: 3
-  completed_phases: 2
+  completed_phases: 3
   total_plans: 12
-  completed_plans: 11
+  completed_plans: 12
 ---
 
 # Project State
@@ -18,14 +18,14 @@ progress:
 See: .planning/PROJECT.md (updated 2026-03-03)
 
 **Core value:** Get stranded Israelis home safely by connecting them with extraction flights, critical local services, and each other in real time.
-**Current focus:** Phase 4 — News Aggregator (next up)
+**Current focus:** Phase 4 — News Aggregator (COMPLETE)
 
 ## Current Position
 
-Phase: 4 (News Aggregator) — In Progress
-Plan: 2 of 3 complete (04-02 done)
-Status: Phase 4 news UI components complete. Next: 04-03 (news page wiring + alert banner).
-Last activity: 2026-03-05 — Phase 4 Plan 02 complete (NewsCard, NewsGrid, FeaturedNewsSection, NewsFilterBar, NewArticlesBanner, useNewsFilters).
+Phase: 4 (News Aggregator) — Complete
+Plan: 3 of 3 complete (04-03 done)
+Status: Phase 4 fully complete. AlertBanner wired into DashboardShell, NewsClientPage replaces Coming Soon.
+Last activity: 2026-03-05 — Phase 4 Plan 03 complete (AlertBanner, DashboardShell integration, NewsClientPage, news page + loading skeleton).
 
 Progress: [██████████] 100%
 
@@ -55,6 +55,7 @@ Progress: [██████████] 100%
 | Phase 02 P03 | 4 | 2 tasks | 5 files |
 | Phase 04-news-aggregator P01 | 12 | 2 tasks | 8 files |
 | Phase 04-news-aggregator P02 | 4 | 2 tasks | 7 files |
+| Phase 04-news-aggregator P03 | 2 | 2 tasks | 5 files |
 
 ## Accumulated Context
 
@@ -110,6 +111,10 @@ Plan 01-04 decisions:
 - [Phase 04-02]: FeaturedNewsSection wraps NewsCard in ring-2 ring-amber-500/30 div to distinguish featured from regular cards without forking NewsCard
 - [Phase 04-02]: NewsGrid pull-to-refresh resets seenCount to null rather than calling Convex refetch — usePaginatedQuery is already reactive
 - [Phase 04-02]: NewsCard uses block anchor tag instead of onClick+window.open — allows native browser behaviors like middle-click
+- [Phase 04-03]: AlertBanner sessionStorage read in useEffect only — avoids hydration mismatch since sessionStorage is not available on server
+- [Phase 04-03]: AlertBanner returns null when visibleAlerts is empty — DashboardShell needs no conditional logic; zero space consumed when no active alerts
+- [Phase 04-03]: NewsClientPage uses simple scrollable layout (no -m-4/-m-6 height hack) — news is a standard page, not a map-split layout
+- [Phase 04-03]: news/page.tsx is a pure server component with no async — Convex handles data reactively client-side via subscriptions
 
 ### Roadmap Evolution
 
@@ -127,5 +132,5 @@ None yet.
 ## Session Continuity
 
 Last session: 2026-03-05
-Stopped at: Completed 04-02-PLAN.md — all news UI components committed. Resume at 04-03 (news page).
+Stopped at: Completed 04-03-PLAN.md — AlertBanner, DashboardShell wiring, NewsClientPage, news page. Phase 4 fully complete.
 Resume file: None

@@ -67,7 +67,7 @@ Requirements for initial release. Each maps to roadmap phases.
 
 - [x] **NEWS-01**: User can view chronological news feed from multiple Israeli sources
 - [x] **NEWS-02**: User can see source attribution (outlet name + favicon) on each article
-- [ ] **NEWS-03**: User can see urgent alert banner pinned above the news feed (admin-created, dismissible)
+- [x] **NEWS-03**: User can see urgent alert banner pinned above the news feed (admin-created, dismissible)
 - [x] **NEWS-04**: System aggregates 10-20 RSS feeds with deduplication
 - [x] **NEWS-05**: User can tap article to open original source in new tab
 - [x] **NEWS-06**: User can see Hebrew and English sources with language badge
@@ -238,7 +238,7 @@ Which phases cover which requirements. Updated during roadmap creation.
 | MAPS-12 | Phase 5 | Pending |
 | NEWS-01 | Phase 4 | Complete |
 | NEWS-02 | Phase 4 | Complete |
-| NEWS-03 | Phase 4 | Pending |
+| NEWS-03 | Phase 4 | Complete |
 | NEWS-04 | Phase 4 | Complete |
 | NEWS-05 | Phase 4 | Complete |
 | NEWS-06 | Phase 4 | Complete |
