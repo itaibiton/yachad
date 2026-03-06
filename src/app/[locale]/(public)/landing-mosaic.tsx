@@ -1073,7 +1073,7 @@ export default function LandingMosaic() {
           }
         }}>
           <DialogContent
-            className="sm:max-w-[860px] border-none bg-white p-0 overflow-hidden shadow-2xl gap-0"
+            className="max-w-[95vw] sm:max-w-[860px] border-none bg-white p-0 overflow-hidden shadow-2xl gap-0"
             showCloseButton={false}
           >
             <DialogTitle className="sr-only">
@@ -1088,10 +1088,10 @@ export default function LandingMosaic() {
               <X className="size-4" />
             </button>
 
-            <div className="flex flex-row min-h-[480px]">
-              {/* ---- Left panel — benefits ---- */}
+            <div className="flex flex-col sm:flex-row sm:min-h-[480px]">
+              {/* ---- Left panel — benefits (hidden on mobile) ---- */}
               <div
-                className="relative flex w-[340px] flex-col justify-between p-8 overflow-hidden"
+                className="relative hidden sm:flex w-full sm:w-[340px] flex-col justify-between p-6 sm:p-8 overflow-hidden"
                 style={{
                   background: "linear-gradient(145deg, #0038b8 0%, #1a4fd6 50%, #2563eb 100%)",
                 }}
@@ -1188,7 +1188,7 @@ export default function LandingMosaic() {
               </div>
 
               {/* ---- Right panel — sign-in actions ---- */}
-              <div className="flex-1 flex flex-col p-8">
+              <div className="flex-1 flex flex-col p-5 sm:p-8">
                 {/* Selected location badge */}
                 {selectedLocation && (
                   <div className="mb-6 flex items-center gap-2.5 rounded-xl border border-gray-200 bg-gray-50/80 px-3.5 py-3">
