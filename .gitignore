@@ -34,8 +34,7 @@ yarn-error.log*
 .env*
 !.env.example
 
-# Convex generated files
-convex/_generated/
+# Convex generated files (committed for Vercel builds)
 
 # vercel
 .vercel
