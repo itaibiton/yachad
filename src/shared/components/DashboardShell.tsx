@@ -4,7 +4,7 @@ import { AppSidebar } from "@/components/app-sidebar";
 import { SidebarProvider, SidebarInset } from "@/components/ui/sidebar";
 import { TopBar } from "./topbar/TopBar";
 import { MobileBottomNav } from "./sidebar/MobileBottomNav";
-import { EmergencyButton } from "./topbar/EmergencyButton";
+
 import { AlertBanner } from "./AlertBanner";
 
 interface DashboardShellProps {
@@ -26,8 +26,6 @@ export function DashboardShell({ children }: DashboardShellProps) {
       {/* Mobile bottom tab navigation — hidden on desktop */}
       <MobileBottomNav />
 
-      {/* Mobile floating emergency button — always on top, above bottom nav */}
-      <EmergencyButton isFAB />
     </SidebarProvider>
   );
 }
