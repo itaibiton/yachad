@@ -15,7 +15,7 @@ export function ChatClientPage() {
   const [showNewChat, setShowNewChat] = useState(false);
 
   return (
-    <div className="-m-4 md:-m-6 flex flex-col h-[calc(100vh-3.5rem)] overflow-hidden">
+    <div className="-m-4 md:-m-6 flex flex-col h-[calc(100vh-3.5rem-4rem)] md:h-[calc(100vh-3.5rem)] overflow-hidden">
       {/* ── Page header ── */}
       <div className="flex items-center gap-3 px-4 pt-4 pb-2 md:px-6 md:pt-6 md:pb-3 shrink-0">
         <div className="flex size-9 items-center justify-center rounded-lg bg-teal-500/10 dark:bg-teal-500/20 shrink-0">
