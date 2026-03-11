@@ -1,6 +1,7 @@
 "use client";
 
 import { useTranslations } from "next-intl";
+import { useAuth } from "@clerk/nextjs";
 import { useQuery } from "convex/react";
 import { formatDistanceToNow } from "date-fns";
 import { MessageSquare, Plus, Hash, User, Users } from "lucide-react";
@@ -39,7 +40,11 @@ export function ChatRoomList({
   country,
 }: ChatRoomListProps) {
   const t = useTranslations("chat");
-  const rooms = useQuery(api.modules.chat.queries.listRooms, { country });
+  const { isSignedIn } = useAuth();
+  const rooms = useQuery(
+    api.modules.chat.queries.listRooms,
+    isSignedIn ? { country } : "skip"
+  );
 
   if (rooms === undefined) {
     return (

@@ -265,6 +265,8 @@ export default defineSchema({
     checkIn: v.number(),
     checkOut: v.number(),
     roomType: v.optional(v.string()),
+    numberOfRooms: v.optional(v.number()),
+    numberOfGuests: v.optional(v.number()),
     originalPrice: v.number(),
     askingPrice: v.number(),
     currency: v.string(),
@@ -275,11 +277,23 @@ export default defineSchema({
     ),
     contactWhatsapp: v.optional(v.string()),
     contactEmail: v.optional(v.string()),
+    description: v.optional(v.string()),
+    imageStorageIds: v.optional(v.array(v.id("_storage"))),
+    imageUrl: v.optional(v.string()),
+    contactCount: v.optional(v.number()),
     isSold: v.optional(v.boolean()),
     isDeleted: v.optional(v.boolean()),
   })
     .index("by_country_checkin", ["country", "checkIn"])
+    .index("by_checkin", ["checkIn"])
     .index("by_seller", ["sellerId"]),
+
+  savedReservations: defineTable({
+    userId: v.id("users"),
+    reservationId: v.id("reservations"),
+  })
+    .index("by_user_reservation", ["userId", "reservationId"])
+    .index("by_user", ["userId"]),
 
   // ============================================================
   // MODULE 7 — Admin

@@ -1,6 +1,6 @@
-import { redirect } from "next/navigation";
+import { ReservationsClientPage } from "@/shared/components/reservations/ReservationsClientPage";
 
 export default async function ReservationsPage({ params }: { params: Promise<{ locale: string }> }) {
-  const { locale } = await params;
-  redirect(`/${locale}/feed`);
+  await params;
+  return <ReservationsClientPage />;
 }

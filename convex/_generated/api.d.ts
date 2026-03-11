@@ -23,6 +23,9 @@ import type * as modules_flights_queries from "../modules/flights/queries.js";
 import type * as modules_news_actions from "../modules/news/actions.js";
 import type * as modules_news_mutations from "../modules/news/mutations.js";
 import type * as modules_news_queries from "../modules/news/queries.js";
+import type * as modules_reservations_mutations from "../modules/reservations/mutations.js";
+import type * as modules_reservations_queries from "../modules/reservations/queries.js";
+import type * as modules_storage_mutations from "../modules/storage/mutations.js";
 import type * as modules_users_mutations from "../modules/users/mutations.js";
 import type * as seed from "../seed.js";
 
@@ -48,6 +51,9 @@ declare const fullApi: ApiFromModules<{
   "modules/news/actions": typeof modules_news_actions;
   "modules/news/mutations": typeof modules_news_mutations;
   "modules/news/queries": typeof modules_news_queries;
+  "modules/reservations/mutations": typeof modules_reservations_mutations;
+  "modules/reservations/queries": typeof modules_reservations_queries;
+  "modules/storage/mutations": typeof modules_storage_mutations;
   "modules/users/mutations": typeof modules_users_mutations;
   seed: typeof seed;
 }>;

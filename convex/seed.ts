@@ -7,7 +7,7 @@ export const clearAll = internalMutation({
     const tables = [
       "chatReactions", "chatPresence", "chatMessages", "chatRooms",
       "postComments", "postLikes", "posts",
-      "savedFlights", "flights",
+      "savedReservations", "savedFlights", "flights",
       "newsArticles", "newsSources", "alerts",
       "reservations", "reports", "auditLog",
       "users",
@@ -792,11 +792,16 @@ export const seedAll = internalMutation({
       checkIn: now + 3 * day,
       checkOut: now + 8 * day,
       roomType: "Double",
+      numberOfRooms: 1,
+      numberOfGuests: 2,
       originalPrice: 1200,
       askingPrice: 800,
       currency: "EUR",
       cancellationPolicy: "full",
       contactWhatsapp: "+972501111111",
+      description: "Beautiful sea-view room, breakfast included. Non-smoking floor.",
+      imageUrl: "https://images.unsplash.com/photo-1566073771259-6a8506099945?w=800&q=80",
+      contactCount: 0,
     });
     await ctx.db.insert("reservations", {
       sellerId: userIds[2],
@@ -806,11 +811,16 @@ export const seedAll = internalMutation({
       checkIn: now + 5 * day,
       checkOut: now + 12 * day,
       roomType: "Family Suite",
+      numberOfRooms: 2,
+      numberOfGuests: 4,
       originalPrice: 2100,
       askingPrice: 1400,
       currency: "EUR",
       cancellationPolicy: "partial",
       contactWhatsapp: "+972502222222",
+      description: "Two-bedroom suite with kitchenette. Pool access included.",
+      imageUrl: "https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?w=800&q=80",
+      contactCount: 0,
     });
     await ctx.db.insert("reservations", {
       sellerId: userIds[3],
@@ -820,11 +830,16 @@ export const seedAll = internalMutation({
       checkIn: now + 2 * day,
       checkOut: now + 5 * day,
       roomType: "Standard King",
+      numberOfRooms: 1,
+      numberOfGuests: 2,
       originalPrice: 900,
       askingPrice: 550,
       currency: "USD",
       cancellationPolicy: "none",
       contactEmail: "daniel.m@gmail.com",
+      description: "Central location near the Grand Bazaar. Gym and spa access.",
+      imageUrl: "https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?w=800&q=80",
+      contactCount: 0,
     });
 
     return {

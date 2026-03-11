@@ -19,7 +19,7 @@ import {
   SidebarRail,
 } from "@/components/ui/sidebar"
 
-const COMING_SOON = new Set(["/map", "/reservations"])
+const COMING_SOON = new Set(["/map"])
 
 const NAV_ITEMS = [
   { href: "/feed", icon: Home, labelKey: "home" },

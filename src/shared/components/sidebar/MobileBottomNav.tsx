@@ -1,6 +1,6 @@
 "use client";
 
-import { Home, Plane, Newspaper, MessageSquare, Upload } from "lucide-react";
+import { Home, Plane, Newspaper, MessageSquare, Hotel, Upload } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { usePathname } from "next/navigation";
 import { useUser } from "@clerk/nextjs";
@@ -11,6 +11,7 @@ import { cn } from "@/lib/utils";
 const MOBILE_NAV_ITEMS = [
   { href: "/feed", icon: Home, labelKey: "home" },
   { href: "/flights", icon: Plane, labelKey: "flights" },
+  { href: "/reservations", icon: Hotel, labelKey: "reservations" },
   { href: "/news", icon: Newspaper, labelKey: "news" },
   { href: "/chat", icon: MessageSquare, labelKey: "chat" },
 ] as const;
